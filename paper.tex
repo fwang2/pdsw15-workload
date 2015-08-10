@@ -1,0 +1,90 @@
+%\documentclass{acm_proc_article-sp}
+\documentclass{sig-alternate}
+\usepackage{subfigure}          % subfigures...
+\usepackage{color}
+\usepackage{algorithm}      % for description of algorithms...
+\usepackage{algorithmic}
+\usepackage{graphicx}           % to include eps figures...
+\usepackage{epstopdf}
+\usepackage{indentfirst}
+\usepackage{verbatim}
+\usepackage{amsmath}
+\usepackage{url}
+%\usepackage{tabularx,ragged2e,booktabs,caption}
+
+%%%%%%% remove the copyright box%%%%%%%%%%%%%%
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd{\maketitle}{\@copyrightspace}{}{}{}
+\makeatother
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\newtheorem{definition}{Definition}
+\graphicspath{{Fig/}}
+
+\definecolor{cpur}{rgb}{0.50,0.00,0.25}
+\definecolor{red}{rgb}{1.00,0.00,0.00}
+\definecolor{darkgreen}{rgb}{0.078,0.667,0.016}
+\newcommand{\cm}{\textcolor{magenta}}
+\newcommand{\cb}{\textcolor{blue}}
+\newcommand{\cred}{\textcolor{red}}
+\newcommand{\cy}{\textcolor{cyan}}
+\newcommand{\cg}{\textcolor{darkgreen}}
+
+%\partopsep 2pt
+
+%\setlength{\parindent}{1.5em}
+\sloppy
+
+%==============================================================================
+\begin{document}
+
+\title{Spider II Workload Characterization}
+%
+% You need the command \numberofauthors to handle the 'placement
+% and alignment' of the authors beneath the title.
+%
+% For aesthetic reasons, we recommend 'three authors at a time'
+% i.e. three 'name/affiliation blocks' be placed beneath the title.
+%
+% NOTE: You are NOT restricted in how many 'rows' of
+% "name/affiliations" may appear. We just ask that you restrict
+% the number of 'columns' to three.
+%
+% Because of the available 'opening page real-estate'
+% we ask you to refrain from putting more than six authors
+% (two rows with three columns) beneath the article title.
+% More than six makes the first-page appear very cluttered indeed.
+%
+% Use the \alignauthor commands to handle the names
+% and affiliations for an 'aesthetic maximum' of six authors.
+% Add names, affiliations, addresses for
+% the seventh etc. author(s) as the argument for the
+% \additionalauthors command.
+% These 'additional authors' will be output/set for you
+% without further effort on your part as the last section in
+% the body of your article BEFORE References or any Appendices.
+
+%\numberofauthors{8} %  in this sample file, there are a *total*
+% of EIGHT authors. SIX appear on the 'first-page' (for formatting
+% reasons) and the remaining two appear in the \additionalauthors section.
+%
+\author{
+}
+
+\maketitle
+\input abstract
+\input intro
+\input overview
+\input workload 
+\input relatedwork
+\input conclusion
+
+%\cleardoublepage
+%\clearpage
+\nocite{reference}
+\bibliographystyle{abbrv}
+\bibliography{refs}
+\end{document}
+

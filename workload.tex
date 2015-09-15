@@ -1,11 +1,19 @@
 \section{Workload Characterization}
 \label{sec:workloadchar}
-a
+
+
 
 Comparing the trends observed in Spider I vs Spider II
 
+
+
 \subsection{I/O Usage Trends}
+
+
+
 \subsubsection{Atlas1 and Atlas2 Utilization}
+
+
 -- Bandwidth
 -- Controller usage trends
 
@@ -25,6 +33,8 @@ For both Spider I and Spider II
 
 \subsection{I/O Requests}
 \subsubsection{Request Size distribution}
+
+
 
 \begin{figure}[!t]
 \begin{center}
@@ -57,25 +67,43 @@ For both Spider I and Spider II
 \end{center}
 \end{figure}
 
-Figure~\ref{fig:spider1-reqsizedist} and Figure~\ref{fig:spider2-reqsizedist} shows
-the distribution of read and writes requests on Spider 1
-and Spider 2, respectively. The Lustre file system supports a range of request
-block sizes, the smallest being 4 kiloBytes (kB) and the largest being 4
-MegaBytes (MB).  However, on Spider 1, the smallest block size we were able to
-monitor was 16KB, a limitation of the DDN RAID controller. Interpreting from
-the CDF and PDF plots here are some interesting observation.
+Figure~\ref{fig:spider1-reqsizedist} and Figure~\ref{fig:spider2-reqsizedist}
+shows the distribution of read and writes requests on Spider 1 and Spider 2,
+respectively. As can be seen, there are differences. The Lustre file system
+supports a range of request block sizes, the smallest being 4 kiloBytes (kB)
+and the largest being 4 MegaBytes (MB).  However, on Spider 1, the smallest
+block size we were able to monitor was 16KB, a limitation of the DDN RAID
+controller. Interpreting from the CDF and PDF plots here are some interesting
+observation.
 
 \begin{itemize}
 
-\item  60\% of write requests on Spider 2 where 4kB or less.  In Spider 1, we
-unable to distinguish between the 4kB, 8kB and 16kB, which accounted for 50\% of
-the write requests.
-\item  Also, Spider 2 has 70\% of the requests which are less than or equal to
-512kB, whereas on Spider 1, only 55\% of the requests were less than 512kB. ?  
-\item   Large number of 512kB requests (SRP ) ?
+\item  60\% of write requests on Spider 2 are 4kB or less.  In Spider 1, we
+unable to distinguish between the 4kB, 8kB and 16kB, which accounted for 50\%
+of the write requests. Accounting for this and comparing Spider 1 and 2 file
+size distributions, it can be seen that there is 10\% more small files (i.e.
+smaller than 8kB) on Spider 2, for write operations. Please remember that these
+are directly obtained from the DDN controllers not from the file system. One
+possible explanation for this increase can be due to the local file system
+(ldiskfs) metadata operations. Other possible explanation can be the
+controller-level background disk integrity check (i.e. scrubbing) events. Exact
+cause of this increase is unknown at this point and it is being investigated.
+For read operations, Spider 1 and Spider 2 behave the same for small files, the
+distribution has not changed.
+
+\item  For writes, Spider 2 has 70\% of the requests which are less than or
+equal to 512kB, whereas on Spider 1, only 55\% of the requests were less than
+512kB. <Have no explanation for this. Maybe Jason/Dustin has something?> 
+
+\item   On Spider 1, we observed a large number of 512kB requests for both read
+and write requests. This was due to the SRP we were running on Spider 1. SRP at
+the time was not able to queue 1024 requests and maximum allowed was 512. This
+problem has been fixed since then in the kernel and on Spider 2 the number of
+512kB requests has been dramatically reduced, as a result.
+
 \item On Spider 2 over 50\% of reads were 1MB, similar to Spider 1 combined
 512kB and 1MB were 50\%. However, only 25\% of writes on Spider 2 are 1MB,
-whereas on Spider 1 over 45% of writes where either 512kB or 1MB.
+whereas on Spider 1 over 45% of writes where either 512kB or 1MB. <Have no explanation for this. Maybe Jason/Dustin has something?>
 
 \end{itemize}
 

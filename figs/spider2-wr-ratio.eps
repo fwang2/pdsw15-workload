@@ -1,7 +1,7 @@
 %!PS-Adobe-2.0 EPSF-2.0
-%%Title: ./eps/rd-wr-ratio.eps
-%%Creator: gnuplot 4.4 patchlevel 2
-%%CreationDate: Tue Nov  9 21:36:56 2010
+%%Title: ./spider2-wr-ratio.eps
+%%Creator: gnuplot 5.0 patchlevel 1
+%%CreationDate: Tue Sep 15 16:43:21 2015
 %%DocumentFonts: (atend)
 %%BoundingBox: 50 50 842 302
 %%EndComments
@@ -18,42 +18,29 @@ gnudict begin
 /Dashlength 1 def
 /Landscape false def
 /Level1 false def
+/Level3 false def
 /Rounded false def
 /ClipToBoundingBox false def
+/SuppressPDFMark false def
 /TransparentPatterns false def
 /gnulinewidth 5.000 def
 /userlinewidth gnulinewidth def
 /Gamma 1.0 def
+/BackgroundColor {-1.000 -1.000 -1.000} def
 %
 /vshift -116 def
 /dl1 {
-  10.0 Dashlength mul mul
+  10.0 Dashlength userlinewidth gnulinewidth div mul mul mul
   Rounded { currentlinewidth 0.75 mul sub dup 0 le { pop 0.01 } if } if
 } def
 /dl2 {
-  10.0 Dashlength mul mul
+  10.0 Dashlength userlinewidth gnulinewidth div mul mul mul
   Rounded { currentlinewidth 0.75 mul add } if
 } def
 /hpt_ 31.5 def
 /vpt_ 31.5 def
 /hpt hpt_ def
 /vpt vpt_ def
-Level1 {} {
-/SDict 10 dict def
-systemdict /pdfmark known not {
-  userdict /pdfmark systemdict /cleartomark get put
-} if
-SDict begin [
-  /Title (./eps/rd-wr-ratio.eps)
-  /Subject (gnuplot plot)
-  /Creator (gnuplot 4.4 patchlevel 2)
-  /Author (yk7)
-%  /Producer (gnuplot)
-%  /Keywords ()
-  /CreationDate (Tue Nov  9 21:36:56 2010)
-  /DOCINFO pdfmark
-end
-} ifelse
 /doclip {
   ClipToBoundingBox {
     newpath 50 50 moveto 842 50 lineto 842 302 lineto 50 302 lineto closepath
@@ -61,7 +48,7 @@ end
   } if
 } def
 %
-% Gnuplot Prolog Version 4.4 (August 2010)
+% Gnuplot Prolog Version 5.0 (Dec 2014)
 %
 %/SuppressPDFMark true def
 %
@@ -78,11 +65,11 @@ end
 /vpt2 vpt 2 mul def
 /hpt2 hpt 2 mul def
 /Lshow {currentpoint stroke M 0 vshift R 
-	Blacktext {gsave 0 setgray show grestore} {show} ifelse} def
+	Blacktext {gsave 0 setgray textshow grestore} {textshow} ifelse} def
 /Rshow {currentpoint stroke M dup stringwidth pop neg vshift R
-	Blacktext {gsave 0 setgray show grestore} {show} ifelse} def
+	Blacktext {gsave 0 setgray textshow grestore} {textshow} ifelse} def
 /Cshow {currentpoint stroke M dup stringwidth pop -2 div vshift R 
-	Blacktext {gsave 0 setgray show grestore} {show} ifelse} def
+	Blacktext {gsave 0 setgray textshow grestore} {textshow} ifelse} def
 /UP {dup vpt_ mul /vpt exch def hpt_ mul /hpt exch def
   /hpt2 hpt 2 mul def /vpt2 vpt 2 mul def} def
 /DL {Color {setrgbcolor Solid {pop []} if 0 setdash}
@@ -96,7 +83,7 @@ end
 /PL {stroke userlinewidth setlinewidth
 	Rounded {1 setlinejoin 1 setlinecap} if} def
 3.8 setmiterlimit
-% Default Line colors
+% Classic Line colors (version 5.0)
 /LCw {1 1 1} def
 /LCb {0 0 0} def
 /LCa {0 0 0} def
@@ -109,19 +96,20 @@ end
 /LC6 {0 0 0} def
 /LC7 {1 0.3 0} def
 /LC8 {0.5 0.5 0.5} def
-% Default Line Types
+% Default dash patterns (version 5.0)
 /LTw {PL [] 1 setgray} def
 /LTb {BL [] LCb DL} def
 /LTa {AL [1 udl mul 2 udl mul] 0 setdash LCa setrgbcolor} def
 /LT0 {PL [] LC0 DL} def
-/LT1 {PL [4 dl1 2 dl2] LC1 DL} def
-/LT2 {PL [2 dl1 3 dl2] LC2 DL} def
-/LT3 {PL [1 dl1 1.5 dl2] LC3 DL} def
-/LT4 {PL [6 dl1 2 dl2 1 dl1 2 dl2] LC4 DL} def
-/LT5 {PL [3 dl1 3 dl2 1 dl1 3 dl2] LC5 DL} def
-/LT6 {PL [2 dl1 2 dl2 2 dl1 6 dl2] LC6 DL} def
-/LT7 {PL [1 dl1 2 dl2 6 dl1 2 dl2 1 dl1 2 dl2] LC7 DL} def
-/LT8 {PL [2 dl1 2 dl2 2 dl1 2 dl2 2 dl1 2 dl2 2 dl1 4 dl2] LC8 DL} def
+/LT1 {PL [2 dl1 3 dl2] LC1 DL} def
+/LT2 {PL [1 dl1 1.5 dl2] LC2 DL} def
+/LT3 {PL [6 dl1 2 dl2 1 dl1 2 dl2] LC3 DL} def
+/LT4 {PL [1 dl1 2 dl2 6 dl1 2 dl2 1 dl1 2 dl2] LC4 DL} def
+/LT5 {PL [4 dl1 2 dl2] LC5 DL} def
+/LT6 {PL [1.5 dl1 1.5 dl2 1.5 dl1 1.5 dl2 1.5 dl1 6 dl2] LC6 DL} def
+/LT7 {PL [3 dl1 3 dl2 1 dl1 3 dl2] LC7 DL} def
+/LT8 {PL [2 dl1 2 dl2 2 dl1 6 dl2] LC8 DL} def
+/SL {[] 0 setdash} def
 /Pnt {stroke [] 0 setdash gsave 1 setlinecap M 0 0 V stroke grestore} def
 /Dia {stroke [] 0 setdash 2 copy vpt add M
   hpt neg vpt neg V hpt vpt neg V
@@ -328,7 +316,8 @@ end
 /PatternFill {gsave /PFa [ 9 2 roll ] def
   PFa 0 get PFa 2 get 2 div add PFa 1 get PFa 3 get 2 div add translate
   PFa 2 get -2 div PFa 3 get -2 div PFa 2 get PFa 3 get Rec
-  gsave 1 setgray fill grestore clip
+  TransparentPatterns {} {gsave 1 setgray fill grestore} ifelse
+  clip
   currentlinewidth 0.5 mul setlinewidth
   /PFs PFa 2 get dup mul PFa 3 get dup mul add sqrt def
   0 0 M PFa 5 get rotate PFs -2 div dup translate
@@ -342,9 +331,14 @@ end
 %
 /languagelevel where
  {pop languagelevel} {1} ifelse
- 2 lt
-	{/InterpretLevel1 true def}
-	{/InterpretLevel1 Level1 def}
+dup 2 lt
+	{/InterpretLevel1 true def
+	 /InterpretLevel3 false def}
+	{/InterpretLevel1 Level1 def
+	 2 gt
+	    {/InterpretLevel3 Level3 def}
+	    {/InterpretLevel3 false def}
+	 ifelse }
  ifelse
 %
 % PostScript level 2 pattern fill definitions
@@ -433,16 +427,17 @@ Level1 {Level1PatternFill} {Level2PatternFill} ifelse
 /Symbol-Oblique /Symbol findfont [1 0 .167 1 0 0] makefont
 dup length dict begin {1 index /FID eq {pop pop} {def} ifelse} forall
 currentdict end definefont pop
+%
 /MFshow {
    { dup 5 get 3 ge
      { 5 get 3 eq {gsave} {grestore} ifelse }
      {dup dup 0 get findfont exch 1 get scalefont setfont
      [ currentpoint ] exch dup 2 get 0 exch R dup 5 get 2 ne {dup dup 6
-     get exch 4 get {Gshow} {stringwidth pop 0 R} ifelse }if dup 5 get 0 eq
+     get exch 4 get {textshow} {stringwidth pop 0 R} ifelse }if dup 5 get 0 eq
      {dup 3 get {2 get neg 0 exch R pop} {pop aload pop M} ifelse} {dup 5
      get 1 eq {dup 2 get exch dup 3 get exch 6 get stringwidth pop -2 div
      dup 0 R} {dup 6 get stringwidth pop -2 div 0 R 6 get
-     show 2 index {aload pop M neg 3 -1 roll neg R pop pop} {pop pop pop
+     textshow 2 index {aload pop M neg 3 -1 roll neg R pop pop} {pop pop pop
      pop aload pop M} ifelse }ifelse }ifelse }
      ifelse }
    forall} def
@@ -461,8 +456,51 @@ currentdict end definefont pop
   Blacktext {gsave 0 setgray MFshow grestore} {MFshow} ifelse } bind def
 /XYsave    { [( ) 1 2 true false 3 ()] } bind def
 /XYrestore { [( ) 1 2 true false 4 ()] } bind def
+Level1 SuppressPDFMark or 
+{} {
+/SDict 10 dict def
+systemdict /pdfmark known not {
+  userdict /pdfmark systemdict /cleartomark get put
+} if
+SDict begin [
+  /Title (./spider2-wr-ratio.eps)
+  /Subject (gnuplot plot)
+  /Creator (gnuplot 5.0 patchlevel 1)
+  /Author (r2y)
+%  /Producer (gnuplot)
+%  /Keywords ()
+  /CreationDate (Tue Sep 15 16:43:21 2015)
+  /DOCINFO pdfmark
 end
+} ifelse
+end
+%
+% Support for boxed text - Ethan A Merritt May 2005
+%
+/InitTextBox { userdict /TBy2 3 -1 roll put userdict /TBx2 3 -1 roll put
+           userdict /TBy1 3 -1 roll put userdict /TBx1 3 -1 roll put
+	   /Boxing true def } def
+/ExtendTextBox { Boxing
+    { gsave dup false charpath pathbbox
+      dup TBy2 gt {userdict /TBy2 3 -1 roll put} {pop} ifelse
+      dup TBx2 gt {userdict /TBx2 3 -1 roll put} {pop} ifelse
+      dup TBy1 lt {userdict /TBy1 3 -1 roll put} {pop} ifelse
+      dup TBx1 lt {userdict /TBx1 3 -1 roll put} {pop} ifelse
+      grestore } if } def
+/PopTextBox { newpath TBx1 TBxmargin sub TBy1 TBymargin sub M
+               TBx1 TBxmargin sub TBy2 TBymargin add L
+	       TBx2 TBxmargin add TBy2 TBymargin add L
+	       TBx2 TBxmargin add TBy1 TBymargin sub L closepath } def
+/DrawTextBox { PopTextBox stroke /Boxing false def} def
+/FillTextBox { gsave PopTextBox 1 1 1 setrgbcolor fill grestore /Boxing false def} def
+0 0 0 0 InitTextBox
+/TBxmargin 20 def
+/TBymargin 20 def
+/Boxing false def
+/textshow { ExtendTextBox Gshow } def
+%
 %%EndProlog
+%%Page: 1 1
 gnudict begin
 gsave
 doclip
@@ -471,14 +509,19 @@ doclip
 0 setgray
 newpath
 (Helvetica) findfont 350 scalefont setfont
+BackgroundColor 0 lt 3 1 roll 0 lt exch 0 lt or or not {BackgroundColor C 1.000 0 0 15840.00 5040.00 BoxColFill} if
 1.000 UL
 LTb
-1.000 UL
+LCb setrgbcolor
+0.500 UL
 LTa
+LCa setrgbcolor
 1715 700 M
 13492 0 V
 stroke
+1.000 UL
 LTb
+LCb setrgbcolor
 1715 700 M
 63 0 V
 13429 0 R
@@ -489,12 +532,16 @@ stroke
 ] -116.7 MRshow
 1.000 UL
 LTb
-1.000 UL
+LCb setrgbcolor
+0.500 UL
 LTa
+LCa setrgbcolor
 1715 1092 M
 13492 0 V
 stroke
+1.000 UL
 LTb
+LCb setrgbcolor
 1715 1092 M
 63 0 V
 13429 0 R
@@ -505,12 +552,16 @@ stroke
 ] -116.7 MRshow
 1.000 UL
 LTb
-1.000 UL
+LCb setrgbcolor
+0.500 UL
 LTa
+LCa setrgbcolor
 1715 1484 M
 13492 0 V
 stroke
+1.000 UL
 LTb
+LCb setrgbcolor
 1715 1484 M
 63 0 V
 13429 0 R
@@ -521,12 +572,16 @@ stroke
 ] -116.7 MRshow
 1.000 UL
 LTb
-1.000 UL
+LCb setrgbcolor
+0.500 UL
 LTa
+LCa setrgbcolor
 1715 1876 M
 13492 0 V
 stroke
+1.000 UL
 LTb
+LCb setrgbcolor
 1715 1876 M
 63 0 V
 13429 0 R
@@ -537,12 +592,16 @@ stroke
 ] -116.7 MRshow
 1.000 UL
 LTb
-1.000 UL
+LCb setrgbcolor
+0.500 UL
 LTa
+LCa setrgbcolor
 1715 2268 M
 13492 0 V
 stroke
+1.000 UL
 LTb
+LCb setrgbcolor
 1715 2268 M
 63 0 V
 13429 0 R
@@ -553,12 +612,16 @@ stroke
 ] -116.7 MRshow
 1.000 UL
 LTb
-1.000 UL
+LCb setrgbcolor
+0.500 UL
 LTa
+LCa setrgbcolor
 1715 2660 M
 13492 0 V
 stroke
+1.000 UL
 LTb
+LCb setrgbcolor
 1715 2660 M
 63 0 V
 13429 0 R
@@ -569,12 +632,16 @@ stroke
 ] -116.7 MRshow
 1.000 UL
 LTb
-1.000 UL
+LCb setrgbcolor
+0.500 UL
 LTa
+LCa setrgbcolor
 1715 3051 M
 13492 0 V
 stroke
+1.000 UL
 LTb
+LCb setrgbcolor
 1715 3051 M
 63 0 V
 13429 0 R
@@ -585,12 +652,16 @@ stroke
 ] -116.7 MRshow
 1.000 UL
 LTb
-1.000 UL
+LCb setrgbcolor
+0.500 UL
 LTa
+LCa setrgbcolor
 1715 3443 M
 13492 0 V
 stroke
+1.000 UL
 LTb
+LCb setrgbcolor
 1715 3443 M
 63 0 V
 13429 0 R
@@ -601,12 +672,16 @@ stroke
 ] -116.7 MRshow
 1.000 UL
 LTb
-1.000 UL
+LCb setrgbcolor
+0.500 UL
 LTa
+LCa setrgbcolor
 1715 3835 M
 13492 0 V
 stroke
+1.000 UL
 LTb
+LCb setrgbcolor
 1715 3835 M
 63 0 V
 13429 0 R
@@ -617,14 +692,18 @@ stroke
 ] -116.7 MRshow
 1.000 UL
 LTb
-1.000 UL
+LCb setrgbcolor
+0.500 UL
 LTa
+LCa setrgbcolor
 1715 4227 M
 10909 0 V
 2373 0 R
 210 0 V
 stroke
+1.000 UL
 LTb
+LCb setrgbcolor
 1715 4227 M
 63 0 V
 13429 0 R
@@ -635,12 +714,16 @@ stroke
 ] -116.7 MRshow
 1.000 UL
 LTb
-1.000 UL
+LCb setrgbcolor
+0.500 UL
 LTa
+LCa setrgbcolor
 1715 4619 M
 13492 0 V
 stroke
+1.000 UL
 LTb
+LCb setrgbcolor
 1715 4619 M
 63 0 V
 13429 0 R
@@ -651,254 +734,218 @@ stroke
 ] -116.7 MRshow
 1.000 UL
 LTb
-1990 700 M
+LCb setrgbcolor
+2444 700 M
 0 63 V
 0 3856 R
 0 -63 V
 stroke
-1990 350 M
-[ [(Helvetica) 350.0 0.0 true true 0 (1)]
+2444 350 M
+[ [(Helvetica) 350.0 0.0 true true 0 (2)]
 ] -116.7 MCshow
 1.000 UL
 LTb
-2541 700 M
+LCb setrgbcolor
+3174 700 M
 0 63 V
 0 3856 R
 0 -63 V
 stroke
-2541 350 M
-[ [(Helvetica) 350.0 0.0 true true 0 (3)]
+3174 350 M
+[ [(Helvetica) 350.0 0.0 true true 0 (4)]
 ] -116.7 MCshow
 1.000 UL
 LTb
-3092 700 M
+LCb setrgbcolor
+3903 700 M
 0 63 V
 0 3856 R
 0 -63 V
 stroke
-3092 350 M
-[ [(Helvetica) 350.0 0.0 true true 0 (5)]
+3903 350 M
+[ [(Helvetica) 350.0 0.0 true true 0 (6)]
 ] -116.7 MCshow
 1.000 UL
 LTb
-3642 700 M
+LCb setrgbcolor
+4632 700 M
 0 63 V
 0 3856 R
 0 -63 V
 stroke
-3642 350 M
-[ [(Helvetica) 350.0 0.0 true true 0 (7)]
+4632 350 M
+[ [(Helvetica) 350.0 0.0 true true 0 (8)]
 ] -116.7 MCshow
 1.000 UL
 LTb
-4193 700 M
+LCb setrgbcolor
+5361 700 M
 0 63 V
 0 3856 R
 0 -63 V
 stroke
-4193 350 M
-[ [(Helvetica) 350.0 0.0 true true 0 (9)]
+5361 350 M
+[ [(Helvetica) 350.0 0.0 true true 0 (10)]
 ] -116.7 MCshow
 1.000 UL
 LTb
-4744 700 M
+LCb setrgbcolor
+6091 700 M
 0 63 V
 0 3856 R
 0 -63 V
 stroke
-4744 350 M
-[ [(Helvetica) 350.0 0.0 true true 0 (11)]
+6091 350 M
+[ [(Helvetica) 350.0 0.0 true true 0 (12)]
 ] -116.7 MCshow
 1.000 UL
 LTb
-5295 700 M
+LCb setrgbcolor
+6820 700 M
 0 63 V
 0 3856 R
 0 -63 V
 stroke
-5295 350 M
-[ [(Helvetica) 350.0 0.0 true true 0 (13)]
+6820 350 M
+[ [(Helvetica) 350.0 0.0 true true 0 (14)]
 ] -116.7 MCshow
 1.000 UL
 LTb
-5845 700 M
+LCb setrgbcolor
+7549 700 M
 0 63 V
 0 3856 R
 0 -63 V
 stroke
-5845 350 M
-[ [(Helvetica) 350.0 0.0 true true 0 (15)]
+7549 350 M
+[ [(Helvetica) 350.0 0.0 true true 0 (16)]
 ] -116.7 MCshow
 1.000 UL
 LTb
-6396 700 M
+LCb setrgbcolor
+8279 700 M
 0 63 V
 0 3856 R
 0 -63 V
 stroke
-6396 350 M
-[ [(Helvetica) 350.0 0.0 true true 0 (17)]
+8279 350 M
+[ [(Helvetica) 350.0 0.0 true true 0 (18)]
 ] -116.7 MCshow
 1.000 UL
 LTb
-6947 700 M
+LCb setrgbcolor
+9008 700 M
 0 63 V
 0 3856 R
 0 -63 V
 stroke
-6947 350 M
-[ [(Helvetica) 350.0 0.0 true true 0 (19)]
+9008 350 M
+[ [(Helvetica) 350.0 0.0 true true 0 (20)]
 ] -116.7 MCshow
 1.000 UL
 LTb
-7497 700 M
+LCb setrgbcolor
+9737 700 M
 0 63 V
 0 3856 R
 0 -63 V
 stroke
-7497 350 M
-[ [(Helvetica) 350.0 0.0 true true 0 (21)]
+9737 350 M
+[ [(Helvetica) 350.0 0.0 true true 0 (22)]
 ] -116.7 MCshow
 1.000 UL
 LTb
-8048 700 M
+LCb setrgbcolor
+10467 700 M
 0 63 V
 0 3856 R
 0 -63 V
 stroke
-8048 350 M
-[ [(Helvetica) 350.0 0.0 true true 0 (23)]
+10467 350 M
+[ [(Helvetica) 350.0 0.0 true true 0 (24)]
 ] -116.7 MCshow
 1.000 UL
 LTb
-8599 700 M
+LCb setrgbcolor
+11196 700 M
 0 63 V
 0 3856 R
 0 -63 V
 stroke
-8599 350 M
-[ [(Helvetica) 350.0 0.0 true true 0 (25)]
+11196 350 M
+[ [(Helvetica) 350.0 0.0 true true 0 (26)]
 ] -116.7 MCshow
 1.000 UL
 LTb
-9149 700 M
+LCb setrgbcolor
+11925 700 M
 0 63 V
 0 3856 R
 0 -63 V
 stroke
-9149 350 M
-[ [(Helvetica) 350.0 0.0 true true 0 (27)]
+11925 350 M
+[ [(Helvetica) 350.0 0.0 true true 0 (28)]
 ] -116.7 MCshow
 1.000 UL
 LTb
-9700 700 M
+LCb setrgbcolor
+12654 700 M
 0 63 V
 0 3856 R
 0 -63 V
 stroke
-9700 350 M
-[ [(Helvetica) 350.0 0.0 true true 0 (29)]
+12654 350 M
+[ [(Helvetica) 350.0 0.0 true true 0 (30)]
 ] -116.7 MCshow
 1.000 UL
 LTb
-10251 700 M
+LCb setrgbcolor
+13384 700 M
 0 63 V
 0 3856 R
 0 -63 V
 stroke
-10251 350 M
-[ [(Helvetica) 350.0 0.0 true true 0 (31)]
+13384 350 M
+[ [(Helvetica) 350.0 0.0 true true 0 (32)]
 ] -116.7 MCshow
 1.000 UL
 LTb
-10801 700 M
+LCb setrgbcolor
+14113 700 M
 0 63 V
 0 3856 R
 0 -63 V
 stroke
-10801 350 M
-[ [(Helvetica) 350.0 0.0 true true 0 (33)]
+14113 350 M
+[ [(Helvetica) 350.0 0.0 true true 0 (34)]
 ] -116.7 MCshow
 1.000 UL
 LTb
-11352 700 M
+LCb setrgbcolor
+14842 700 M
 0 63 V
 0 3856 R
 0 -63 V
 stroke
-11352 350 M
-[ [(Helvetica) 350.0 0.0 true true 0 (35)]
+14842 350 M
+[ [(Helvetica) 350.0 0.0 true true 0 (36)]
 ] -116.7 MCshow
 1.000 UL
 LTb
-11903 700 M
-0 63 V
-0 3856 R
-0 -63 V
-stroke
-11903 350 M
-[ [(Helvetica) 350.0 0.0 true true 0 (37)]
-] -116.7 MCshow
+LCb setrgbcolor
 1.000 UL
 LTb
-12454 700 M
-0 63 V
-0 3856 R
-0 -63 V
-stroke
-12454 350 M
-[ [(Helvetica) 350.0 0.0 true true 0 (39)]
-] -116.7 MCshow
-1.000 UL
-LTb
-13004 700 M
-0 63 V
-0 3856 R
-0 -63 V
-stroke
-13004 350 M
-[ [(Helvetica) 350.0 0.0 true true 0 (41)]
-] -116.7 MCshow
-1.000 UL
-LTb
-13555 700 M
-0 63 V
-0 3856 R
-0 -63 V
-stroke
-13555 350 M
-[ [(Helvetica) 350.0 0.0 true true 0 (43)]
-] -116.7 MCshow
-1.000 UL
-LTb
-14106 700 M
-0 63 V
-0 3856 R
-0 -63 V
-stroke
-14106 350 M
-[ [(Helvetica) 350.0 0.0 true true 0 (45)]
-] -116.7 MCshow
-1.000 UL
-LTb
-14656 700 M
-0 63 V
-0 3856 R
-0 -63 V
-stroke
-14656 350 M
-[ [(Helvetica) 350.0 0.0 true true 0 (47)]
-] -116.7 MCshow
-1.000 UL
-LTb
-1.000 UL
-LTb
+LCb setrgbcolor
 1715 4619 N
 0 -3919 V
 13492 0 V
 0 3919 V
 -13492 0 V
 Z stroke
+1.000 UP
+1.000 UL
+LTb
+LCb setrgbcolor
 LCb setrgbcolor
 280 2659 M
 currentpoint gsave translate -270 rotate 0 0 moveto
@@ -906,17 +953,18 @@ currentpoint gsave translate -270 rotate 0 0 moveto
 ] -150.0 MCshow
 grestore
 LTb
-1.000 UP
-1.000 UL
-LTb
+LCb setrgbcolor
 % Begin plot #1
 1.000 UL
-LT0
+LTb
+LCb setrgbcolor
 LCb setrgbcolor
 13674 4381 M
 [ [(Helvetica) 350.0 0.0 true true 0 (Write)]
 ] -116.7 MRshow
-LT0
+1.000 UL
+LTb
+LCb setrgbcolor
 13884 4294 903 175 40 45 2 PatternFill
 LCb setrgbcolor
 13884 4294 N
@@ -925,442 +973,412 @@ LCb setrgbcolor
 -903 0 V
 0 -174 V
 Z stroke
-LT0
-1922 700 138 2341 40 45 2 PatternFill
-LCb setrgbcolor
-1922 700 N
-0 2340 V
-137 0 V
-0 -2340 V
--137 0 V
-Z stroke
-LT0
-2197 700 139 2250 40 45 2 PatternFill
-LCb setrgbcolor
-2197 700 N
-0 2249 V
-138 0 V
-0 -2249 V
--138 0 V
-Z stroke
-LT0
-2472 700 139 2276 40 45 2 PatternFill
-LCb setrgbcolor
-2472 700 N
-0 2275 V
-138 0 V
-0 -2275 V
--138 0 V
-Z stroke
-LT0
-2748 700 138 2304 40 45 2 PatternFill
-LCb setrgbcolor
-2748 700 N
-0 2303 V
-137 0 V
-0 -2303 V
--137 0 V
-Z stroke
-LT0
-3023 700 139 2305 40 45 2 PatternFill
-LCb setrgbcolor
-3023 700 N
-0 2304 V
-138 0 V
-0 -2304 V
--138 0 V
-Z stroke
-LT0
-3298 700 139 2292 40 45 2 PatternFill
-LCb setrgbcolor
-3298 700 N
-0 2291 V
-138 0 V
-0 -2291 V
--138 0 V
-Z stroke
-LT0
-3574 700 138 2296 40 45 2 PatternFill
-LCb setrgbcolor
-3574 700 N
-0 2295 V
-137 0 V
-0 -2295 V
--137 0 V
-Z stroke
-LT0
-3849 700 139 2269 40 45 2 PatternFill
-LCb setrgbcolor
-3849 700 N
-0 2268 V
-138 0 V
-0 -2268 V
--138 0 V
-Z stroke
-LT0
-4124 700 139 2259 40 45 2 PatternFill
-LCb setrgbcolor
-4124 700 N
-0 2258 V
-138 0 V
-0 -2258 V
--138 0 V
-Z stroke
-LT0
-4400 700 138 2299 40 45 2 PatternFill
-LCb setrgbcolor
-4400 700 N
-0 2298 V
-137 0 V
-0 -2298 V
--137 0 V
-Z stroke
-LT0
-4675 700 139 2254 40 45 2 PatternFill
-LCb setrgbcolor
-4675 700 N
-0 2253 V
-138 0 V
-0 -2253 V
--138 0 V
-Z stroke
-LT0
-4950 700 139 2212 40 45 2 PatternFill
-LCb setrgbcolor
-4950 700 N
-0 2211 V
-138 0 V
-0 -2211 V
--138 0 V
-Z stroke
-LT0
-5226 700 138 2304 40 45 2 PatternFill
-LCb setrgbcolor
-5226 700 N
-0 2303 V
-137 0 V
-0 -2303 V
--137 0 V
-Z stroke
-LT0
-5501 700 139 2262 40 45 2 PatternFill
-LCb setrgbcolor
-5501 700 N
-0 2261 V
-138 0 V
-0 -2261 V
--138 0 V
-Z stroke
-LT0
-5776 700 139 2292 40 45 2 PatternFill
-LCb setrgbcolor
-5776 700 N
-0 2291 V
-138 0 V
-0 -2291 V
--138 0 V
-Z stroke
-LT0
-6052 700 138 2258 40 45 2 PatternFill
-LCb setrgbcolor
-6052 700 N
-0 2257 V
-137 0 V
-0 -2257 V
--137 0 V
-Z stroke
-LT0
-6327 700 139 2243 40 45 2 PatternFill
-LCb setrgbcolor
-6327 700 N
-0 2242 V
-138 0 V
-0 -2242 V
--138 0 V
-Z stroke
-LT0
-6602 700 139 2202 40 45 2 PatternFill
-LCb setrgbcolor
-6602 700 N
-0 2201 V
-138 0 V
-0 -2201 V
--138 0 V
-Z stroke
-LT0
-6878 700 138 2257 40 45 2 PatternFill
-LCb setrgbcolor
-6878 700 N
-0 2256 V
-137 0 V
-0 -2256 V
--137 0 V
-Z stroke
-LT0
-7153 700 139 2434 40 45 2 PatternFill
-LCb setrgbcolor
-7153 700 N
-0 2433 V
-138 0 V
-0 -2433 V
--138 0 V
-Z stroke
-LT0
-7428 700 139 2264 40 45 2 PatternFill
-LCb setrgbcolor
-7428 700 N
-0 2263 V
-138 0 V
-0 -2263 V
--138 0 V
-Z stroke
-LT0
-7704 700 138 2251 40 45 2 PatternFill
-LCb setrgbcolor
-7704 700 N
-0 2250 V
-137 0 V
-0 -2250 V
--137 0 V
-Z stroke
-LT0
-7979 700 139 2260 40 45 2 PatternFill
-LCb setrgbcolor
-7979 700 N
-0 2259 V
-138 0 V
-0 -2259 V
--138 0 V
-Z stroke
-LT0
-8254 700 139 2320 40 45 2 PatternFill
-LCb setrgbcolor
-8254 700 N
-0 2319 V
-138 0 V
-0 -2319 V
--138 0 V
-Z stroke
-LT0
-8530 700 139 2314 40 45 2 PatternFill
-LCb setrgbcolor
-8530 700 N
-0 2313 V
-138 0 V
-0 -2313 V
--138 0 V
-Z stroke
-LT0
-8805 700 139 2270 40 45 2 PatternFill
-LCb setrgbcolor
-8805 700 N
-0 2269 V
-138 0 V
-0 -2269 V
--138 0 V
-Z stroke
-LT0
-9081 700 138 2199 40 45 2 PatternFill
-LCb setrgbcolor
-9081 700 N
-0 2198 V
-137 0 V
-0 -2198 V
--137 0 V
-Z stroke
-LT0
-9356 700 139 2276 40 45 2 PatternFill
-LCb setrgbcolor
-9356 700 N
-0 2275 V
-138 0 V
-0 -2275 V
--138 0 V
-Z stroke
-LT0
-9631 700 139 2304 40 45 2 PatternFill
-LCb setrgbcolor
-9631 700 N
-0 2303 V
-138 0 V
-0 -2303 V
--138 0 V
-Z stroke
-LT0
-9907 700 138 2323 40 45 2 PatternFill
-LCb setrgbcolor
-9907 700 N
-0 2322 V
-137 0 V
-0 -2322 V
--137 0 V
-Z stroke
-LT0
-10182 700 139 2258 40 45 2 PatternFill
-LCb setrgbcolor
-10182 700 N
-0 2257 V
-138 0 V
-0 -2257 V
--138 0 V
-Z stroke
-LT0
-10457 700 139 2305 40 45 2 PatternFill
-LCb setrgbcolor
-10457 700 N
-0 2304 V
-138 0 V
-0 -2304 V
--138 0 V
-Z stroke
-LT0
-10733 700 138 2277 40 45 2 PatternFill
-LCb setrgbcolor
-10733 700 N
-0 2276 V
-137 0 V
-0 -2276 V
--137 0 V
-Z stroke
-LT0
-11008 700 139 2290 40 45 2 PatternFill
-LCb setrgbcolor
-11008 700 N
-0 2289 V
-138 0 V
-0 -2289 V
--138 0 V
-Z stroke
-LT0
-11283 700 139 2211 40 45 2 PatternFill
-LCb setrgbcolor
-11283 700 N
-0 2210 V
-138 0 V
-0 -2210 V
--138 0 V
-Z stroke
-LT0
-11559 700 138 2196 40 45 2 PatternFill
-LCb setrgbcolor
-11559 700 N
-0 2195 V
-137 0 V
-0 -2195 V
--137 0 V
-Z stroke
-LT0
-11834 700 139 2216 40 45 2 PatternFill
-LCb setrgbcolor
-11834 700 N
-0 2215 V
-138 0 V
-0 -2215 V
--138 0 V
-Z stroke
-LT0
-12109 700 139 2286 40 45 2 PatternFill
-LCb setrgbcolor
-12109 700 N
-0 2285 V
-138 0 V
-0 -2285 V
--138 0 V
-Z stroke
-LT0
-12385 700 138 2251 40 45 2 PatternFill
-LCb setrgbcolor
-12385 700 N
-0 2250 V
-137 0 V
-0 -2250 V
--137 0 V
-Z stroke
-LT0
-12660 700 139 2245 40 45 2 PatternFill
-LCb setrgbcolor
-12660 700 N
-0 2244 V
-138 0 V
-0 -2244 V
--138 0 V
-Z stroke
-LT0
-12935 700 139 2210 40 45 2 PatternFill
-LCb setrgbcolor
-12935 700 N
-0 2209 V
-138 0 V
-0 -2209 V
--138 0 V
-Z stroke
-LT0
-13211 700 138 2266 40 45 2 PatternFill
-LCb setrgbcolor
-13211 700 N
-0 2265 V
-137 0 V
-0 -2265 V
--137 0 V
-Z stroke
-LT0
-13486 700 139 2181 40 45 2 PatternFill
-LCb setrgbcolor
-13486 700 N
-0 2180 V
-138 0 V
-0 -2180 V
--138 0 V
-Z stroke
-LT0
-13761 700 139 2244 40 45 2 PatternFill
-LCb setrgbcolor
-13761 700 N
-0 2243 V
-138 0 V
-0 -2243 V
--138 0 V
-Z stroke
-LT0
-14037 700 138 2213 40 45 2 PatternFill
-LCb setrgbcolor
-14037 700 N
-0 2212 V
-137 0 V
-0 -2212 V
--137 0 V
-Z stroke
-LT0
-14312 700 139 2271 40 45 2 PatternFill
-LCb setrgbcolor
-14312 700 N
-0 2270 V
-138 0 V
-0 -2270 V
--138 0 V
-Z stroke
-LT0
-14587 700 139 2204 40 45 2 PatternFill
-LCb setrgbcolor
-14587 700 N
-0 2203 V
-138 0 V
-0 -2203 V
--138 0 V
-Z stroke
-LT0
-14863 700 138 2205 40 45 2 PatternFill
-LCb setrgbcolor
-14863 700 N
-0 2204 V
-137 0 V
-0 -2204 V
--137 0 V
-Z stroke
-LT0
-% End plot #1
 1.000 UL
 LTb
+LCb setrgbcolor
+1988 700 184 3195 40 45 2 PatternFill
+LCb setrgbcolor
+1988 700 N
+0 3194 V
+183 0 V
+0 -3194 V
+-183 0 V
+Z stroke
+1.000 UL
+LTb
+LCb setrgbcolor
+2353 700 183 3155 40 45 2 PatternFill
+LCb setrgbcolor
+2353 700 N
+0 3154 V
+182 0 V
+0 -3154 V
+-182 0 V
+Z stroke
+1.000 UL
+LTb
+LCb setrgbcolor
+2718 700 183 3173 40 45 2 PatternFill
+LCb setrgbcolor
+2718 700 N
+0 3172 V
+182 0 V
+0 -3172 V
+-182 0 V
+Z stroke
+1.000 UL
+LTb
+LCb setrgbcolor
+3082 700 184 3195 40 45 2 PatternFill
+LCb setrgbcolor
+3082 700 N
+0 3194 V
+183 0 V
+0 -3194 V
+-183 0 V
+Z stroke
+1.000 UL
+LTb
+LCb setrgbcolor
+3447 700 183 3183 40 45 2 PatternFill
+LCb setrgbcolor
+3447 700 N
+0 3182 V
+182 0 V
+0 -3182 V
+-182 0 V
+Z stroke
+1.000 UL
+LTb
+LCb setrgbcolor
+3812 700 183 3207 40 45 2 PatternFill
+LCb setrgbcolor
+3812 700 N
+0 3206 V
+182 0 V
+0 -3206 V
+-182 0 V
+Z stroke
+1.000 UL
+LTb
+LCb setrgbcolor
+4176 700 184 3199 40 45 2 PatternFill
+LCb setrgbcolor
+4176 700 N
+0 3198 V
+183 0 V
+0 -3198 V
+-183 0 V
+Z stroke
+1.000 UL
+LTb
+LCb setrgbcolor
+4541 700 183 3181 40 45 2 PatternFill
+LCb setrgbcolor
+4541 700 N
+0 3180 V
+182 0 V
+0 -3180 V
+-182 0 V
+Z stroke
+1.000 UL
+LTb
+LCb setrgbcolor
+4906 700 183 3179 40 45 2 PatternFill
+LCb setrgbcolor
+4906 700 N
+0 3178 V
+182 0 V
+0 -3178 V
+-182 0 V
+Z stroke
+1.000 UL
+LTb
+LCb setrgbcolor
+5270 700 184 3163 40 45 2 PatternFill
+LCb setrgbcolor
+5270 700 N
+0 3162 V
+183 0 V
+0 -3162 V
+-183 0 V
+Z stroke
+1.000 UL
+LTb
+LCb setrgbcolor
+5635 700 183 3168 40 45 2 PatternFill
+LCb setrgbcolor
+5635 700 N
+0 3167 V
+182 0 V
+0 -3167 V
+-182 0 V
+Z stroke
+1.000 UL
+LTb
+LCb setrgbcolor
+6000 700 183 3180 40 45 2 PatternFill
+LCb setrgbcolor
+6000 700 N
+0 3179 V
+182 0 V
+0 -3179 V
+-182 0 V
+Z stroke
+1.000 UL
+LTb
+LCb setrgbcolor
+6364 700 184 3341 40 45 2 PatternFill
+LCb setrgbcolor
+6364 700 N
+0 3340 V
+183 0 V
+0 -3340 V
+-183 0 V
+Z stroke
+1.000 UL
+LTb
+LCb setrgbcolor
+6729 700 183 3200 40 45 2 PatternFill
+LCb setrgbcolor
+6729 700 N
+0 3199 V
+182 0 V
+0 -3199 V
+-182 0 V
+Z stroke
+1.000 UL
+LTb
+LCb setrgbcolor
+7094 700 183 3189 40 45 2 PatternFill
+LCb setrgbcolor
+7094 700 N
+0 3188 V
+182 0 V
+0 -3188 V
+-182 0 V
+Z stroke
+1.000 UL
+LTb
+LCb setrgbcolor
+7458 700 184 3169 40 45 2 PatternFill
+LCb setrgbcolor
+7458 700 N
+0 3168 V
+183 0 V
+0 -3168 V
+-183 0 V
+Z stroke
+1.000 UL
+LTb
+LCb setrgbcolor
+7823 700 183 3212 40 45 2 PatternFill
+LCb setrgbcolor
+7823 700 N
+0 3211 V
+182 0 V
+0 -3211 V
+-182 0 V
+Z stroke
+1.000 UL
+LTb
+LCb setrgbcolor
+8188 700 183 3171 40 45 2 PatternFill
+LCb setrgbcolor
+8188 700 N
+0 3170 V
+182 0 V
+0 -3170 V
+-182 0 V
+Z stroke
+1.000 UL
+LTb
+LCb setrgbcolor
+8552 700 183 2759 40 45 2 PatternFill
+LCb setrgbcolor
+8552 700 N
+0 2758 V
+182 0 V
+0 -2758 V
+-182 0 V
+Z stroke
+1.000 UL
+LTb
+LCb setrgbcolor
+8917 700 183 2838 40 45 2 PatternFill
+LCb setrgbcolor
+8917 700 N
+0 2837 V
+182 0 V
+0 -2837 V
+-182 0 V
+Z stroke
+1.000 UL
+LTb
+LCb setrgbcolor
+9281 700 184 2833 40 45 2 PatternFill
+LCb setrgbcolor
+9281 700 N
+0 2832 V
+183 0 V
+0 -2832 V
+-183 0 V
+Z stroke
+1.000 UL
+LTb
+LCb setrgbcolor
+9646 700 183 2756 40 45 2 PatternFill
+LCb setrgbcolor
+9646 700 N
+0 2755 V
+182 0 V
+0 -2755 V
+-182 0 V
+Z stroke
+1.000 UL
+LTb
+LCb setrgbcolor
+10011 700 183 2774 40 45 2 PatternFill
+LCb setrgbcolor
+10011 700 N
+0 2773 V
+182 0 V
+0 -2773 V
+-182 0 V
+Z stroke
+1.000 UL
+LTb
+LCb setrgbcolor
+10375 700 184 2752 40 45 2 PatternFill
+LCb setrgbcolor
+10375 700 N
+0 2751 V
+183 0 V
+0 -2751 V
+-183 0 V
+Z stroke
+1.000 UL
+LTb
+LCb setrgbcolor
+10740 700 183 2747 40 45 2 PatternFill
+LCb setrgbcolor
+10740 700 N
+0 2746 V
+182 0 V
+0 -2746 V
+-182 0 V
+Z stroke
+1.000 UL
+LTb
+LCb setrgbcolor
+11105 700 183 2837 40 45 2 PatternFill
+LCb setrgbcolor
+11105 700 N
+0 2836 V
+182 0 V
+0 -2836 V
+-182 0 V
+Z stroke
+1.000 UL
+LTb
+LCb setrgbcolor
+11469 700 184 2827 40 45 2 PatternFill
+LCb setrgbcolor
+11469 700 N
+0 2826 V
+183 0 V
+0 -2826 V
+-183 0 V
+Z stroke
+1.000 UL
+LTb
+LCb setrgbcolor
+11834 700 183 2751 40 45 2 PatternFill
+LCb setrgbcolor
+11834 700 N
+0 2750 V
+182 0 V
+0 -2750 V
+-182 0 V
+Z stroke
+1.000 UL
+LTb
+LCb setrgbcolor
+12199 700 183 2838 40 45 2 PatternFill
+LCb setrgbcolor
+12199 700 N
+0 2837 V
+182 0 V
+0 -2837 V
+-182 0 V
+Z stroke
+1.000 UL
+LTb
+LCb setrgbcolor
+12563 700 184 2654 40 45 2 PatternFill
+LCb setrgbcolor
+12563 700 N
+0 2653 V
+183 0 V
+0 -2653 V
+-183 0 V
+Z stroke
+1.000 UL
+LTb
+LCb setrgbcolor
+12928 700 183 2831 40 45 2 PatternFill
+LCb setrgbcolor
+12928 700 N
+0 2830 V
+182 0 V
+0 -2830 V
+-182 0 V
+Z stroke
+1.000 UL
+LTb
+LCb setrgbcolor
+13293 700 183 2750 40 45 2 PatternFill
+LCb setrgbcolor
+13293 700 N
+0 2749 V
+182 0 V
+0 -2749 V
+-182 0 V
+Z stroke
+1.000 UL
+LTb
+LCb setrgbcolor
+13657 700 184 2597 40 45 2 PatternFill
+LCb setrgbcolor
+13657 700 N
+0 2596 V
+183 0 V
+0 -2596 V
+-183 0 V
+Z stroke
+1.000 UL
+LTb
+LCb setrgbcolor
+14022 700 183 2706 40 45 2 PatternFill
+LCb setrgbcolor
+14022 700 N
+0 2705 V
+182 0 V
+0 -2705 V
+-182 0 V
+Z stroke
+1.000 UL
+LTb
+LCb setrgbcolor
+14387 700 183 2704 40 45 2 PatternFill
+LCb setrgbcolor
+14387 700 N
+0 2703 V
+182 0 V
+0 -2703 V
+-182 0 V
+Z stroke
+1.000 UL
+LTb
+LCb setrgbcolor
+14751 700 184 2669 40 45 2 PatternFill
+LCb setrgbcolor
+14751 700 N
+0 2668 V
+183 0 V
+0 -2668 V
+-183 0 V
+Z stroke
+1.000 UL
+LTb
+LCb setrgbcolor
+% End plot #1
+2.000 UL
+LTb
+LCb setrgbcolor
+1.000 UL
+LTb
+LCb setrgbcolor
 1715 4619 N
 0 -3919 V
 13492 0 V
@@ -1370,6 +1388,7 @@ Z stroke
 1.000 UP
 1.000 UL
 LTb
+LCb setrgbcolor
 stroke
 grestore
 end

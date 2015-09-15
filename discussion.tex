@@ -1,4 +1,23 @@
-\section{Discussion or a better name for this section}
+\section{Discussion}
 \label{sec:discuss} 
 
--- over 75\% write on storage, at the same time our write requests are 4K and 1M only. 
+Large-scale file systems are complex to architect and deploy and they are
+equally complex to operate. Key to successful deployment and operations is
+understanding the I/O workloads exercising these file systems. At the OLCF we
+pay particular attention to collecting file system statistic for better
+understanding how our file systems are used. Over the 5 year lifetime of the
+Spider 1 file system, we collected detailed operational data and we are doing
+the same with the Spider 2 file system. Spider 1 data was essential in
+architecting the Spider 2 system, and we are expecting that Spider 2 data will
+instrumental in building the next-generation parallel file system at the OLCF.
+ 
+
+As the Spider 2 data shows us, we observed roughly 75\% writes on the Spider 2
+storage system. This is slightly more different than what we have observed on
+Spider 1 and we conclude that Spider 2 is currently exercised with more
+write-heavy I/O workloads. At the same time our write requests consist of only
+4kB and 1MB write requests. This is a good step in the right direction, since
+the 512kB write requests have been eliminated from the system due to SRP
+software updates and fixes. The existence of extra 512kB was detrimental to the
+overall aggregate I/O performance on Spider 1 and this has been corrected in
+Spider 2.  

@@ -18,7 +18,28 @@ Comparing the trends observed in Spider I vs Spider II
 -- Controller usage trends
 
 \subsubsection{Read vs Write}
-For both Spider I and Spider II
+
+Figure~\ref{fig:rwratio} shows the read and write ratios on Spider 1 and 2
+storage systems. As can be seen, on Spider 1 60\% of the I/O workload was write
+operations and 40\% was reads. Spider 1 was a center-wide shared resource
+across all OLCF platforms, and high percent of the read requests was attributed
+to analysis and data transfer I/O workloads accessing Spider 1. 
+
+Spider 2 is also a center-wide shared resource, and a similar trend can be
+observed. However, the percent of reads on Spider 2 is less compared to Spider
+1, and they amount to roughly 25\%. This can be attributed to large-data
+transfers into Spider 2 from various resources currently going on for later
+processing on Titan. Also it is quite visible in Figure~\ref{fig:rwratio}(b)
+that Atlas1 portion of the Spider 2 is 10\% more write-intensive than the
+Atlas2 (left half vs. right half of the Figure~\ref{fig:rwratio}(b). This
+discrepancy is due to a user project allocation problem we encountered early
+on. User projects were categorized in terms of science domains and expected I/O
+requirements equally on Atlas1 and Atlas2 portions when Spider 2 was turned
+into production. However, our expectation did not materialize completely, and
+since then we have been observing more I/O on Atlas1 compared to Atlas2. We
+have taken steps (e.g. moving some user projects from Atlas1 to Atlas2) to
+rectify this mismatch and over the time it is expected that both portions will
+be exercised with roughly equivalent I/O workloads. 
 
 \begin{figure}[!t]
 \begin{center}

@@ -103,7 +103,7 @@ Figure~\ref{fig:bwUsage}, shows the aggregate bandwidth (i.e. the sum of read
 and write bandwidth) observed on Spider 2. We do not have a comparable data set
 for Spider 1, however, we think it is useful to share the Spider 2 data. 
 
-Spider 2 system was rated for + 1 TB/s at the file system level, if exercised
+Spider 2 system was rated for +1 TB/s at the file system level, if exercised
 with well-formed, large, sequential I/O on a quiet system. However, under
 normal production workloads, the file system is exercised by random mixed I/O
 workloads. Our earlier tests showed that a single NL-SAS disk drive can achieve
@@ -117,7 +117,7 @@ observed bandwidth was less than 50 GB/s. Around 4\% of the time the bandwidth
 was over 50 GB/s. For less than 1\% of the time the bandwidth peaked over
 250 GB/s. These values are in line with the design goals of Spider 2, as
 typically scientific applications are compute intensive, with performing bursts
-of I/O less than 5\% of their compute time allocations. 
+of I/O less than 5\% of their compute time allocations. This suggests that our scientific workloads can benefit from a burst buffer storage layer to absorb these bursty I/O patterns.
 
 Figure~\ref{fig:storageUsage} shows the Spider 2 space utilization. As can be
 seen, currently, more than 50\% of the capacity being used.  For a sustained a

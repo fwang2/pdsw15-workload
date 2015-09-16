@@ -12,10 +12,15 @@ Comparing the trends observed in Spider I vs Spider II
 
 
 \subsubsection{Atlas1 and Atlas2 Utilization}
-
-
--- Bandwidth
--- Controller usage trends
+In Figure~\ref{fig:rwratio} there is a slight imbalance in the total write 
+requests for 50\% of the controllers sampled. This imbalance is because the upper 
+level file systems are imbalanced. As we stated above we deployed to file system 
+namespaces on  non-overlapping hardware resources. The file systems are allocated 
+across projects at the OLCF and some projects have been heavier I/O consumers than 
+others; it turns out that the "atlas1" partition is being utilized at a higher rate.
+In general we see a higher percentage of write operations on Spider 2 as compared
+to Spider 1. This meets our design expectations for handling large memory checkpoints
+with a minimal reading of those checkpoint data files.
 
 \subsubsection{Read vs Write}
 

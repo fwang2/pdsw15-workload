@@ -77,8 +77,8 @@ These values show us that, our read I/O workloads slightly getting lower of the
 peak value, however, our writes on Spider 2 is more of the peak. This can be
 attributed to better formed write I/O being issued from the Titan
 supercomputer. While the exact reasons for this is under the investigation, we
-believe the middleware libraries such as ADIOS are helping to improve the I/O
-characteristics. 
+believe the middleware libraries such as ADIOS~\cite{adios} are helping to
+improve the I/O characteristics. 
 
 
 \begin{figure}[!thb]
@@ -99,20 +99,34 @@ characteristics.
 
 \subsubsection{Spider 2 Usage Stats}
 
-Figure~\ref{fig:bwUsage}, shows the aggregate bandwidth, sum of read and write bandwidth,
-observed during the uptime of the storage server. Though the theoritical peak of the storage system is
-over 1 TB/s, practically we can expect a max of .....
-  
-We see that more for more than 95% of the storage uptime the
-bandwidth was less than 50 GB/s. Only around 4% of the time the bandwidth was
-over 50 GB/s. For less than 1 % of the time the bandwidth peaked over 250GB/s. 
+Figure~\ref{fig:bwUsage}, shows the aggregate bandwidth (i.e. the sum of read
+and write bandwidth) observed on Spider 2. We do not have a comparable data set
+for Spider 1, however, we think it is useful to share the Spider 2 data. 
 
-This is expected, as typically scientific applications are compute intensive,
-with I/O less than 5% of their compute time and occur in bursts. Also, say
-we sustain a bandwidth of 250GB/s for 10 minutes in a day, which is 0.69%, we
-will be generating 146TB's of data.
+Spider 2 system was rated for + 1 TB/s at the file system level, if exercised
+with well-formed, large, sequential I/O on a quiet system. However, under
+normal production workloads, the file system is exercised by random mixed I/O
+workloads. Our earlier tests showed that a single NL-SAS disk drive can achieve
+20-25% of its peak performance under random I/O workloads (with 1 MB I/O block
+sizes). Therefore, the Spider 2 system was expected to perform roughly at 250
+GB/s under bursty production workloads~\cite{bestpractices}.
 
-From Figure~\ref{fig:storageUsage}, we see the storage space utilization on the system, with more 50% of the capacity being used. 
+
+As can be seen from the Figure~\ref{fig:bwUsage}, for more than 95\% of the the
+observed bandwidth was less than 50 GB/s. Around 4\% of the time the bandwidth
+was over 50 GB/s. For less than 1\% of the time the bandwidth peaked over
+250 GB/s. These values are in line with the design goals of Spider 2, as
+typically scientific applications are compute intensive, with performing bursts
+of I/O less than 5\% of their compute time allocations. 
+
+Figure~\ref{fig:storageUsage} shows the Spider 2 space utilization. As can be
+seen, currently, more than 50\% of the capacity being used.  For a sustained a
+bandwidth of 250 GB/s (peak random production bandwidth) for 10 minutes in a
+day, 146 TBs of data will be generated. Given the 32 PB aggregate capacity of
+Spider 2, this will consume all space on Spider 2 in less than a year. To
+prevent this, OLCF employs a ``purge'' policy. Periodically, files with a
+timestamp older than 14 days are deleted from the Spider 2 scratch file system.
+This helps maintain a utilization less than 75\% on the Spider 2 system.  
 
 \begin{figure}[!thb]
 \begin{center}
@@ -189,93 +203,95 @@ observation.
 \item  60\% of write requests on Spider 2 are 4kB or less.  In Spider 1, we
 unable to distinguish between the 4kB, 8kB and 16kB, which accounted for 50\%
 of the write requests. Accounting for this and comparing Spider 1 and 2 file
-size distributions, it can be seen that there are 10\% more small block requests (i.e.
-smaller than 8kB) on Spider 2, for write operations. Please remember that these
-are directly obtained from the DDN controllers not from the file system. One
-possible explanation for this increase can be due to the local file system
-(ldiskfs) metadata operations. Other possible explanation can be the
-controller-level background disk integrity check (i.e. scrubbing) events. Exact
-cause of this increase is unknown at this point and it is being investigated.
-For read operations, Spider 1 and Spider 2 behave the same for small files, the
-distribution has not changed.
+size distributions, it can be seen that there are 10\% more small block
+requests (i.e.  smaller than 8kB) on Spider 2, for write operations. Please
+remember that these are directly obtained from the DDN controllers not from the
+file system. One possible explanation for this increase can be due to the local
+file system (ldiskfs) metadata operations. Other possible explanation can be
+the controller-level background disk integrity check (i.e. scrubbing) events.
+Exact cause of this increase is unknown at this point and it is being
+investigated.  For read operations, Spider 1 and Spider 2 behave the same for
+small files, the distribution has not changed.
 
 \item  For writes, Spider 2 has 70\% of the requests which are less than or
 equal to 512kB, whereas on Spider 1, only 55\% of the requests were less than
-512kB. It is worth noting that the data presented in this paper are gathered in 
-different years, the application versions have changed, and there are a different
-mix of applications running as the data were collected. The OLCF traditionally has 
-a large mix of applications that have well-formed I/O or are using middleware 
-libraries such as ADIOS \cite{adios}. The latest round of applications do not have 
-this robustness in their I/O patterns, and have shown to have some pathological 
-tendencies; these smaller files and request sizes that are more focused on read 
-operations are large performance drains on a system that was designed to perform 
-1MB sequential write and read I/O operations. 
+512kB. It is worth noting that the data presented in this paper are gathered in
+different years, the application versions have changed, and there are a
+different mix of applications running as the data were collected. The OLCF
+traditionally has a large mix of applications that have well-formed I/O or are
+using middleware libraries such as ADIOS \cite{adios}. The latest round of
+applications do not have this robustness in their I/O patterns, and have shown
+to have some pathological tendencies; these smaller files and request sizes
+that are more focused on read operations are large performance drains on a
+system that was designed to perform 1MB sequential write and read I/O
+operations. 
 
 \item On Spider 2 over 50\% of reads were 1MB, similar to Spider 1 combined
 512kB and 1MB were 50\%. However, only 25\% of writes on Spider 2 are 1MB,
-whereas on Spider 1 over 45\% of writes where either 512kB or 1MB. We postulate 
-again that the Application workload of the OLCF is different enough at the times of 
-measurement to show this difference in the distribution.
+whereas on Spider 1 over 45\% of writes where either 512kB or 1MB. We postulate
+again that the Application workload of the OLCF is different enough at the
+times of measurement to show this difference in the distribution.
 
 \item   On Spider 1, we observed a large number of 512kB requests for both read
-and write requests. This was due to problems in the dm-multipath \cite{mpath} 
-package that was available for the version of the Linux operating system that was 
-employed. This version had a bug that broke up a 1024kB I/O request into 2 
-512kB requests. Later versions addressed this performance problem by not breaking 
-up the I/O request. Additionally the I/O request scheduler that was used on 
-Spider 1 was ``deadline'' which allowed the kernel to re-order some I/O requests. 
-In 2011 Spider 1 was moved to the ``noop'' scheduler, and this phenomenon 
-disappeared. We see the same drop in 512kB requests for Spider 2 as well. Finally, 
-changes to the ib\_srp kernel module allow more queued requests and better memory 
-handling of a larger queue through scatter\/gather tables. This allowed fully 
-queuing 1024kB requests and pushing them all the way to the DDN controller. As 
-a result of these 3 changes the number of 512kB requests have dramatically been 
-reduced for Spider 2.
-\end{itemize}
+and write requests. This was due to problems in the dm-multipath \cite{mpath}
+package that was available for the version of the Linux operating system that
+was employed. This version had a bug that broke up a 1024kB I/O request into 2
+512kB requests. Later versions addressed this performance problem by not
+breaking up the I/O request. Additionally the I/O request scheduler that was
+used on Spider 1 was ``deadline'' which allowed the kernel to re-order some I/O
+requests.  In 2011 Spider 1 was moved to the ``noop'' scheduler, and this
+phenomenon disappeared. We see the same drop in 512kB requests for Spider 2 as
+well. Finally, changes to the ib\_srp kernel module allow more queued requests
+and better memory handling of a larger queue through scatter\/gather tables.
+This allowed fully queuing 1024kB requests and pushing them all the way to the
+DDN controller. As a result of these 3 changes the number of 512kB requests
+have dramatically been reduced for Spider 2.  \end{itemize}
 
 \subsubsection{Request Size Latency distribution}
 
 With the new DDN SFA API, now we have the capability of collecting I/O request
-service latencies. Figure~\ref{fig:spider1-reqLat} shows Spider 2 request service
-latency distributions. Service latency here includes the total sum of the time
-spent on the queue and the time spent on fetching/putting data from/to the
-disk. As can be seen from the figure, 90\% of reads and more than 80\% write
-requests are serviced at most in 16ms and this is the finest granularity the
-DDN API can provide. 
+service latencies. Figure~\ref{fig:spider1-reqLat} shows Spider 2 request
+service latency distributions. Service latency here includes the total sum of
+the time spent on the queue and the time spent on fetching/putting data from/to
+the disk. As can be seen from the figure, 90\% of reads and more than 80\%
+write requests are serviced at most in 16ms and this is the finest granularity
+the DDN API can provide. 
 
-The SFA12KX's software incorporates newer caching algorithms that are designed to 
-lower the latency for certain operations, and with the readahead cache disabled 
-and ReACT\textsuperscript{TM} enabled, we see this highly desirable distribution 
-of latencies of 16ms or less.
+The SFA12KX's software incorporates newer caching algorithms that are designed
+to lower the latency for certain operations, and with the readahead cache
+disabled and ReACT\textsuperscript{TM} enabled, we see this highly desirable
+distribution of latencies of 16ms or less.
 
 \begin{itemize}
-\item
-The SFA12KX disk controller has the ability to analyze incoming I/O request stream
-and begin to aggressively read-ahead on the disk to internal cache. The hope is that 
-a large read can be sped up by hiding the latency of the seek if the data is in cache.
-In our experience and testing, this was a very large hindrance to performance in 
-workloads that mimic the many file read operations from Titan's compute nodes. This 
-is due to the algorithm caching the wrong data, having to invalidate the cache, 
-seek to the location on disk, cache that data, and then repeat with the next read 
-request. By disabling the read-ahead cache, we dramatically lower the latency of 
-the non-sequential read requests we see in the production environment. 
 
-\item
-The Real-time Adaptive Cache Technology (ReACT\textsuperscript{TM})\cite{ReACT} feature was developed
-to make the SFA platforms more attractive from an IOPS perspective. The feature's main goal 
-is to speed up the performance of the large 1MB write requests, avoiding caching the I/O on the 
-partner controller. The decision to only cache <1MB write operations relieves a bottleneck 
-that earlier versions of DDN's products did poorly - including the S2A 9900's that 
-Spider 1 was constructed of. In earlier versions of the product you could either mirror 
-your cache on the partner controller for data resilience in the face of controller 
-failure, or you could disable the cache and get performance for the large streaming 1MB 
-(or larger) writes. ReACT gives a framework where the best of both worlds can exist. 
-A 1MB write can be written directly to disk, which is the lowest latency possible for 
-that operation. A 4kB can be written into controller cache and also mirrored to the 
-partner controller in about the same amount of time, which is far faster than 
-committing that operation to the disk. We feel that this feature has allowed 
-Spider 2 to reach the low latencies across the spectrum of write request sizes 
-and is a large benefit to our users. 
+\item The SFA12KX disk controller has the ability to analyze incoming I/O
+request stream and begin to aggressively read-ahead on the disk to internal
+cache. The hope is that a large read can be sped up by hiding the latency of
+the seek if the data is in cache.  In our experience and testing, this was a
+very large hindrance to performance in workloads that mimic the many file read
+operations from Titan's compute nodes. This is due to the algorithm caching the
+wrong data, having to invalidate the cache, seek to the location on disk, cache
+that data, and then repeat with the next read request. By disabling the
+read-ahead cache, we dramatically lower the latency of the non-sequential read
+requests we see in the production environment. 
+
+\item The Real-time Adaptive Cache Technology
+(ReACT\textsuperscript{TM})\cite{ReACT} feature was developed to make the SFA
+platforms more attractive from an IOPS perspective. The feature's main goal is
+to speed up the performance of the large 1MB write requests, avoiding caching
+the I/O on the partner controller. The decision to only cache <1MB write
+operations relieves a bottleneck that earlier versions of DDN's products did
+poorly - including the S2A 9900's that Spider 1 was constructed of. In earlier
+versions of the product you could either mirror your cache on the partner
+controller for data resilience in the face of controller failure, or you could
+disable the cache and get performance for the large streaming 1MB (or larger)
+writes. ReACT gives a framework where the best of both worlds can exist.  A 1MB
+write can be written directly to disk, which is the lowest latency possible for
+that operation. A 4kB can be written into controller cache and also mirrored to
+the partner controller in about the same amount of time, which is far faster
+than committing that operation to the disk. We feel that this feature has
+allowed Spider 2 to reach the low latencies across the spectrum of write
+request sizes and is a large benefit to our users. 
 
 \end{itemize}
 
@@ -293,12 +309,6 @@ and is a large benefit to our users.
 \end{tabular}
 \vspace{-0.1in}
 \caption{Spider 2 - Distribution of Request Service Time(latency)}
+\label{fig:spider1-reqLat} 
 \end{center}
 \end{figure}
-
-
-
-
-%\subsection{Request Size vs Bandwidth}
-
- 

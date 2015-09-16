@@ -1,6 +1,7 @@
 \section{System Overview}
 \label{sec:overview}
 
+\begin{comment} 
 The OLCF deployed Spider 1 file system in 2008~\cite{spider1}. It served as a
 center-wide file system for all OLCF resources, including Jaguar~\cite{jaguar}
 for 5 years, and was decommissioned in 2013. Our analysis of Spider 1 I/O
@@ -35,19 +36,13 @@ These resources are organized in two separate name spaces in Spider 2. These
 namespaces are identified as ``atlas 1'' and ``atlas 2.'' Namespaces are built
 on non-overlapping Spider 2 hardware resources. Figure~\ref{fig:arch} shows the
 conceptual Spider 2 architecture. 
+\end{comment}
 
-Spider 2 storage system was rated and tested for 1.4 TB/s aggregate read and
-1.2 TB/s write performance. At the Lustre file system level these translate
-into +1 TB/s aggregate read and write performance.
+Spider 2 which was deployed just before Spider 1 was retired in 2013 was architected, deployed, and is operated by the OLCF staff; just as was done for Spider 1. Figure~\ref{fig:arch} shows a conceptual architecture for Spider 2. The primary building block is a DataDirect Networks SFA12KX RAID controller pair with 10 disk enclosures containing a total of 560 2TB NL-SAS disk drives. 8 Lustre OSS hosts are external to the SFA12KX and are connected to the couplet via 2 FDR Infiniband links on each host for path redundancy. In total there are 36 building blocks that are build into two file system namespaces on non-overlapping hardware resources. The resulting system was rated and tested for an aggregate performance of 1.4 TB/s for read and 1.2 TB/s writes which translates into +1 TB/s aggregate read and write performance.
 
 Table~\ref{table:spider12} highlights key characteristics of the Spider 1 and 2 file systems.
 
-The OLCF also built a comprehensive monitoring system for operating the Spider
-2 resources, as well as other OLCF systems. More details on these can be found
-in~\cite{olcf-monitoring}. Some of these monitoring tools have been in-house
-developed at the OLCF. For monitoring the DDN systems, OLCF staff has been
-using a tool called ``DDNTool.'' The DDNTool has been coded for Spider 1
-originally and later updated for Spider 2.  
+Through over a decade of deployments the OLCF has built comprehensive monitoring tools for Spider\cite{olcf-monitoring}. Many of these monitoring tools have been in-house developed at the OLCF, particularly ``DDNTool'', a tool which was developed for monitoring the I/O requests from at the DDN controller level. With the release of SFAOS, DDN created a python-based API for querying performance and request size data from their storage systems. ``DDNTool'' version 2 makes use of this API to query all 36 SFA12KX couplets for this data.
 
 
 \begin{figure}[!t]

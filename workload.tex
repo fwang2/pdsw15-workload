@@ -12,15 +12,18 @@ Comparing the trends observed in Spider I vs Spider II
 \subsubsection{Read vs Write}
 
 %\subsubsection{Atlas1 and Atlas2 Utilization}
-In Figure~\ref{fig:rwratio} there is a slight imbalance in the total write 
-requests for 50\% of the controllers sampled. This imbalance is because the upper 
-level file systems are imbalanced. As we stated above we deployed to file system 
-namespaces on  non-overlapping hardware resources. The file systems are allocated 
-across projects at the OLCF and some projects have been heavier I/O consumers than 
-others; it turns out that the "atlas1" partition is being utilized at a higher rate.
-In general we see a higher percentage of write operations on Spider 2 as compared
-to Spider 1. This meets our design expectations for handling large memory checkpoints
-with a minimal reading of those checkpoint data files.
+
+Figure~\ref{fig:rwratio} shows the read vs. write balance observed on the
+Spider 2 system.  As can be seen, there is a slight imbalance in the total
+write requests for 50\% of the controllers sampled. This imbalance is because
+the upper level file systems are imbalanced. As we stated above we deployed to
+file system namespaces on  non-overlapping hardware resources. The file systems
+are allocated across projects at the OLCF and some projects have been heavier
+I/O consumers than others; it turns out that the ``atlas1'' partition is being
+utilized at a higher rate.  In general we see a higher percentage of write
+operations on Spider 2 as compared to Spider 1. This meets our design
+expectations for handling large memory checkpoints with a minimal reading of
+those checkpoint data files.
 
 
 Figure~\ref{fig:rwratio} shows the read and write ratios on Spider 1 and 2
@@ -164,8 +167,8 @@ package that was available for the version of the Linux operating system that wa
 employed. This version had a bug that broke up a 1024kB I/O request into 2 
 512kB requests. Later versions addressed this performance problem by not breaking 
 up the I/O request. Additionally the I/O request scheduler that was used on 
-Spider 1 was "deadline" which allowed the kernel to re-order some I/O requests. 
-In 2011 Spider 1 was moved to the "noop" scheduler, and this phenomenon 
+Spider 1 was ``deadline'' which allowed the kernel to re-order some I/O requests. 
+In 2011 Spider 1 was moved to the ``noop'' scheduler, and this phenomenon 
 disappeared. We see the same drop in 512kB requests for Spider 2 as well. Finally, 
 changes to the ib\_srp kernel module allow more queued requests and better memory 
 handling of a larger queue through scatter\/gather tables. This allowed fully 

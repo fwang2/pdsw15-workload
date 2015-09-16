@@ -14,7 +14,10 @@ is exercised with a more write-heavy I/O workload compared to Spider 1 (75\%
 vs. 60\%). Our data also shows that we keeping a healthy space utilization on
 Spider 2, due to our periodic purge policies. Furthermore, due to the fixes in
 dm\_multipath and ib\_srp software layers, we are utilizing the Spider 2 system
-resources more effectively. All our data has been collected by in-house
+resources more effectively. The Spider 2 bandwidth usage statics shows that our
+system is working within the design specifications, however, it is also evident
+that our scientific applications can be more effectively served by a burst
+buffer storage layer, as well. All our data has been collected by in-house
 developed monitoring tools. We believe the observed data set will help us
 better design the next-generation Spider file and storage system and will also
 be helpful to the larger community for building more effective large-scale file

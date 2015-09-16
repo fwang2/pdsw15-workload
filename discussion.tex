@@ -4,7 +4,7 @@
 Large-scale file systems are complex to architect and deploy and they are
 equally complex to operate. Key to successful deployment and operations is
 understanding the I/O workloads exercising these file systems. At the OLCF we
-pay particular attention to collecting file system statistic for better
+pay particular attention to collecting file system statistics for better
 understanding how our file systems are used. Over the 5 year lifetime of the
 Spider 1 file system, we collected detailed operational data and we are doing
 the same with the Spider 2 file system. Spider 1 data was essential in
@@ -17,7 +17,8 @@ storage system. This is slightly more different than what we have observed on
 Spider 1 and we conclude that Spider 2 is currently exercised with more
 write-heavy I/O workloads. At the same time our write requests consist of only
 4kB and 1MB write requests. This is a good step in the right direction, since
-the 512kB write requests have been eliminated from the system due to SRP
-software updates and fixes. The existence of extra 512kB was detrimental to the
+the 512kB write requests have been eliminated from the system due to the fixes 
+in dm-multipath, I/O request scheduling and ib_srp kernel module feature 
+development and bug-fixing. The existence of extra 512kB was detrimental to the
 overall aggregate I/O performance on Spider 1 and this has been corrected in
 Spider 2.  

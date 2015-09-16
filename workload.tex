@@ -1,29 +1,28 @@
 \section{Workload Characterization}
 \label{sec:workloadchar}
 
-
-
-Comparing the trends observed in Spider I vs Spider II
-
+As a follow-up to our characterization of the Spider 1 storage system, below we
+will be presenting a comparative analysis of the I/O workloads observed on the
+Spider systems. Our analysis focuses on I/O usage trends and I/O requests
+characteristics.
 
 
 \subsection{I/O Usage Trends}
 
-\subsubsection{Read vs Write}
+\subsubsection{Read vs Write Operations}
 
-%\subsubsection{Atlas1 and Atlas2 Utilization}
 
-Figure~\ref{fig:rwratio} shows the read vs. write balance observed on the
-Spider 2 system.  As can be seen, there is a slight imbalance in the total
-write requests for 50\% of the controllers sampled. This imbalance is because
-the upper level file systems are imbalanced. As we stated above we deployed to
-file system namespaces on  non-overlapping hardware resources. The file systems
-are allocated across projects at the OLCF and some projects have been heavier
-I/O consumers than others; it turns out that the ``atlas1'' partition is being
-utilized at a higher rate.  In general we see a higher percentage of write
-operations on Spider 2 as compared to Spider 1. This meets our design
-expectations for handling large memory checkpoints with a minimal reading of
-those checkpoint data files.
+Figure~\ref{fig:rwratio} shows the read vs. write balance observed on the two
+Spider systems.  As can be seen, there is a slight imbalance in the total write
+requests for 50\% of the controllers sampled in the Spider 2 system. This
+imbalance is because the upper level file systems are imbalanced. As we stated
+above we deployed to file system namespaces on  non-overlapping hardware
+resources. The file systems are allocated across projects at the OLCF and some
+projects have been heavier I/O consumers than others; it turns out that the
+``atlas1'' partition is being utilized at a higher rate.  In general we see a
+higher percentage of write operations on Spider 2 as compared to Spider 1. This
+meets our design expectations for handling large memory checkpoints with a
+minimal reading of those checkpoint data files.
 
 
 Figure~\ref{fig:rwratio} shows the read and write ratios on Spider 1 and 2
@@ -38,7 +37,7 @@ observed. However, the percent of reads on Spider 2 is less compared to Spider
 transfers into Spider 2 from various resources currently going on for later
 processing on Titan. Also it is quite visible in Figure~\ref{fig:rwratio}(b)
 that Atlas1 portion of the Spider 2 is 10\% more write-intensive than the
-Atlas2 (left half vs. right half of the Figure~\ref{fig:rwratio}(b). This
+Atlas2 (left half vs. the right half of the Figure~\ref{fig:rwratio}(b). This
 discrepancy is due to a user project allocation problem we encountered early
 on. User projects were categorized in terms of science domains and expected I/O
 requirements equally on Atlas1 and Atlas2 portions when Spider 2 was turned
@@ -64,24 +63,28 @@ be exercised with roughly equivalent I/O workloads.
 
 \subsubsection{Peak Bandwidth Usage}
 
-Figure~\ref{fig:ddnpeakBW} (a) and Figure~\ref{fig:ddnpeakBW}(b), shows the peak
-read and write bandwidth observed at the DDN RAID controllers for Spider 1 and Spider 2, respectively.
+Figure~\ref{fig:ddnpeakBW} (a) and Figure~\ref{fig:ddnpeakBW}(b), shows the
+peak read and write bandwidth observed at the DDN RAID controllers for Spider 1
+and Spider 2, respectively. 
 
-On Spider 1, the peak read bandwidth observed was 90\% of the maximum on the RAID
-controllers. The maximum aggreagatec( combined read and write) bandwidth of 3
-GB/s for the controller on Spider 1, and 36GB/s for the controllers on Spider 2. 
-The write peaked at 50\% for Spider 1. On Spider 2 the reads peaked at
-80% of the capacity. However, on Spider 2 the controllers peaked at 70% of their maximum
-for writes. 
-
-This is could be atrributed to the gemini interconnect, increased I/O ROUTERS.  
+As can be seen, on Spider 1, the peak read bandwidth observed was 90\% of the
+maximum on the S2A9900 RAID controllers, which was 3 GB/s per SSU. The maximum
+bandwidth for Spider 2 SFA12KX is 36 GB/s and we observed 80\% of the peak
+value. For writes, the bandwidth observed was 50\% for Spider 1 and 70\% for
+Spider 2 controllers. 
  
+These values show us that, our read I/O workloads slightly getting lower of the
+peak value, however, our writes on Spider 2 is more of the peak. This can be
+attributed to better formed write I/O being issued from the Titan
+supercomputer. While the exact reasons for this is under the investigation, we
+believe the middleware libraries such as ADIOS are helping to improve the I/O
+characteristics. 
 
 
 \begin{figure}[!thb]
 \begin{center}
 \begin{tabular}{c}
-\hspace*{-1cm}                                                           
+%\hspace*{-1cm}                                                           
 {\includegraphics[width=0.450\textwidth]{./figs/spider1-bw-perc-max.eps}}\\
 {(a) Spider 1}\\
 \\

@@ -123,7 +123,7 @@ different years, the application versions have changed, and there are a differen
 mix of applications running as the data were collected. The OLCF traditionally has 
 a large mix of applications that have well-formed I\/O or are using middleware 
 libraries such as ADIOS \cite{adios}. The latest round of applications do not have 
-this robustness in their I\/O patterns, and have shown to have some pathalogical 
+this robustness in their I\/O patterns, and have shown to have some pathological 
 tendencies; these smaller files and request sizes that are more focused on read 
 operations are large performance drains on a system that was designed to perform 
 1MB sequential write and read I\/O operations. 
@@ -131,7 +131,7 @@ operations are large performance drains on a system that was designed to perform
 \item On Spider 2 over 50\% of reads were 1MB, similar to Spider 1 combined
 512kB and 1MB were 50\%. However, only 25\% of writes on Spider 2 are 1MB,
 whereas on Spider 1 over 45\% of writes where either 512kB or 1MB. We postulate 
-again that the Application workload of the OLCF is different enoug at the times of 
+again that the Application workload of the OLCF is different enough at the times of 
 measurement to show this difference in the distribution.
 
 \item   On Spider 1, we observed a large number of 512kB requests for both read
@@ -139,7 +139,7 @@ and write requests. This was due to problems in the dm-multipath \cite{mpath}
 package that was available for the version of the Linux operating system that was 
 employed. This version had a bug that broke up a 1024kB I\/O request into 2 
 512kB requests. Later versions addressed this performance problem by not breaking 
-up the I\/O request. Additonally the I\/O request scheduler that was used on 
+up the I\/O request. Additionally the I\/O request scheduler that was used on 
 Spider 1 was "deadline" which allowed the kernel to re-order some I\/O requests. 
 In 2011 Spider 1 was moved to the "noop" scheduler, and this phenomenon 
 disappeared. We see the same drop in 512kB requests for Spider 2 as well. Finally, 

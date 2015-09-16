@@ -93,7 +93,7 @@ be exercised with roughly equivalent I/O workloads.
 \end{figure}
 
 Figure~\ref{fig:spider1-reqsizedist} and Figure~\ref{fig:spider2-reqsizedist}
-shows the distribution of read and writes requests on Spider 1 and Spider 2,
+shows the distribution of read and write requests on Spider 1 and Spider 2,
 respectively. As can be seen, there are differences. The Lustre file system
 supports a range of request block sizes, the smallest being 4 kiloBytes (kB)
 and the largest being 4 MegaBytes (MB).  However, on Spider 1, the smallest
@@ -106,7 +106,7 @@ observation.
 \item  60\% of write requests on Spider 2 are 4kB or less.  In Spider 1, we
 unable to distinguish between the 4kB, 8kB and 16kB, which accounted for 50\%
 of the write requests. Accounting for this and comparing Spider 1 and 2 file
-size distributions, it can be seen that there is 10\% more small files (i.e.
+size distributions, it can be seen that there are 10\% more small block requests (i.e.
 smaller than 8kB) on Spider 2, for write operations. Please remember that these
 are directly obtained from the DDN controllers not from the file system. One
 possible explanation for this increase can be due to the local file system
@@ -118,20 +118,38 @@ distribution has not changed.
 
 \item  For writes, Spider 2 has 70\% of the requests which are less than or
 equal to 512kB, whereas on Spider 1, only 55\% of the requests were less than
-512kB. <Have no explanation for this. Maybe Jason/Dustin has something?> 
-
-\item   On Spider 1, we observed a large number of 512kB requests for both read
-and write requests. This was due to the SRP we were running on Spider 1. SRP at
-the time was not able to queue 1024 requests and maximum allowed was 512. This
-problem has been fixed since then in the kernel and on Spider 2 the number of
-512kB requests has been dramatically reduced, as a result.
+512kB. It is worth noting that the data presented in this paper are gathered in 
+different years, the application versions have changed, and there are a different
+mix of applications running as the data were collected. The OLCF traditionally has 
+a large mix of applications that have well-formed I\/O or are using middleware 
+libraries such as ADIOS \cite{adios}. The latest round of applications do not have 
+this robustness in their I\/O patterns, and have shown to have some pathalogical 
+tendencies; these smaller files and request sizes that are more focused on read 
+operations are large performance drains on a system that was designed to perform 
+1MB sequential write and read I\/O operations. 
 
 \item On Spider 2 over 50\% of reads were 1MB, similar to Spider 1 combined
 512kB and 1MB were 50\%. However, only 25\% of writes on Spider 2 are 1MB,
-whereas on Spider 1 over 45\% of writes where either 512kB or 1MB. <Have no explanation for this. Maybe Jason/Dustin has something?>
+whereas on Spider 1 over 45\% of writes where either 512kB or 1MB. We postulate 
+again that the Application workload of the OLCF is different enoug at the times of 
+measurement to show this difference in the distribution.
+
+\item   On Spider 1, we observed a large number of 512kB requests for both read
+and write requests. This was due to problems in the dm-multipath \cite{mpath} 
+package that was available for the version of the Linux operating system that was 
+employed. This version had a bug that broke up a 1024kB I\/O request into 2 
+512kB requests. Later versions addressed this performance problem by not breaking 
+up the I\/O request. Additonally the I\/O request scheduler that was used on 
+Spider 1 was "deadline" which allowed the kernel to re-order some I\/O requests. 
+In 2011 Spider 1 was moved to the "noop" scheduler, and this phenomenon 
+disappeared. We see the same drop in 512kB requests for Spider 2 as well. Finally, 
+changes to the ib\_srp kernel module allow more queued requests and better memory 
+handling of a larger queue through scatter\/gather tables. This allowed fully 
+queuing 1024kB requests and pushing them all the way to the DDN controller. As 
+a result of these 3 changes the number of 512kB requests have dramatically been 
+reduced for Spider 2.
 
 \end{itemize}
-
 
 \subsubsection{Request Size Latency distribution}
 

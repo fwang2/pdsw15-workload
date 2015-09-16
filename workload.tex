@@ -121,12 +121,12 @@ equal to 512kB, whereas on Spider 1, only 55\% of the requests were less than
 512kB. It is worth noting that the data presented in this paper are gathered in 
 different years, the application versions have changed, and there are a different
 mix of applications running as the data were collected. The OLCF traditionally has 
-a large mix of applications that have well-formed I\/O or are using middleware 
+a large mix of applications that have well-formed I/O or are using middleware 
 libraries such as ADIOS \cite{adios}. The latest round of applications do not have 
-this robustness in their I\/O patterns, and have shown to have some pathological 
+this robustness in their I/O patterns, and have shown to have some pathological 
 tendencies; these smaller files and request sizes that are more focused on read 
 operations are large performance drains on a system that was designed to perform 
-1MB sequential write and read I\/O operations. 
+1MB sequential write and read I/O operations. 
 
 \item On Spider 2 over 50\% of reads were 1MB, similar to Spider 1 combined
 512kB and 1MB were 50\%. However, only 25\% of writes on Spider 2 are 1MB,
@@ -137,10 +137,10 @@ measurement to show this difference in the distribution.
 \item   On Spider 1, we observed a large number of 512kB requests for both read
 and write requests. This was due to problems in the dm-multipath \cite{mpath} 
 package that was available for the version of the Linux operating system that was 
-employed. This version had a bug that broke up a 1024kB I\/O request into 2 
+employed. This version had a bug that broke up a 1024kB I/O request into 2 
 512kB requests. Later versions addressed this performance problem by not breaking 
-up the I\/O request. Additionally the I\/O request scheduler that was used on 
-Spider 1 was "deadline" which allowed the kernel to re-order some I\/O requests. 
+up the I/O request. Additionally the I/O request scheduler that was used on 
+Spider 1 was "deadline" which allowed the kernel to re-order some I/O requests. 
 In 2011 Spider 1 was moved to the "noop" scheduler, and this phenomenon 
 disappeared. We see the same drop in 512kB requests for Spider 2 as well. Finally, 
 changes to the ib\_srp kernel module allow more queued requests and better memory 
@@ -154,15 +154,44 @@ reduced for Spider 2.
 \subsubsection{Request Size Latency distribution}
 
 With the new DDN SFA API, now we have the capability of collecting I/O request
-service latencies. Figure {fig:spider1-reqLat} shows Spider 2 request service
+service latencies. Figure~\ref{fig:spider1-reqLat} shows Spider 2 request service
 latency distributions. Service latency here includes the total sum of the time
 spent on the queue and the time spent on fetching/putting data from/to the
 disk. As can be seen from the figure, 90\% of reads and more than 80\% write
 requests are serviced at most in 16ms and this is the finest granularity the
 DDN API can provide. 
 
---readahead cache settings
---react cache settings
+The SFA12KX's software incorporates newer caching algorithms that are designed to 
+lower the latency for certain operations, and with the readahead cache disabled 
+and ReACT\textsuperscript{TM} enabled, we see this highly desirable distribution 
+of latencies of 16ms or less.
+
+\begin{itemize}
+\item Read-Ahead Cache
+The SFA12KX disk controller has the ability to analyze incoming I/O request stream
+and begin to aggressively read-ahead on the disk to internal cache. The hope is that 
+a large read can be sped up by hiding the latency of the seek if the data is in cache.
+In our experience and testing, this was a very large hindrance to performance in 
+workloads that mimic the many file read operations from Titan's compute nodes. This 
+is due to the algorithm caching the wrong data, having to invalidate the cache, 
+seek to the location on disk, cache that data, and then repeat with the next read 
+request. 
+
+\item ReACT\textsuperscript{TM}
+The Real-time Adaptive Cache Technology (ReACT\textsuperscript{TM}) feature was developed
+to make the SFA platforms more attractive from an IOPS perspective. The feature's main goal 
+is to speed up the performance of the large 1MB write requests, avoiding caching the I/O on the 
+partner controller. The decision to only cache <1MB write operations relieves a bottleneck 
+that earlier versions of DDN's products did poorly - including the S2A 9900's that 
+Spider 1 was constructed of. In earlier versions of the product you could either mirror 
+your cache on the partner controller for data resilience in the face of controller 
+failure, or you could disable the cache and get performance for the large streaming 1MB 
+(or larger) writes. ReACT gives a framework where the best of both worlds can exist. 
+We feel that this feature has allowed Spider 2 to reach the low latencies across the
+spectrum of write request sizes and is a large benefit to our users. 
+
+\end{itemize}
+
 
   
 

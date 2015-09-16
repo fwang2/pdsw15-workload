@@ -167,7 +167,7 @@ and ReACT\textsuperscript{TM} enabled, we see this highly desirable distribution
 of latencies of 16ms or less.
 
 \begin{itemize}
-\item Read-Ahead Cache
+\item
 The SFA12KX disk controller has the ability to analyze incoming I/O request stream
 and begin to aggressively read-ahead on the disk to internal cache. The hope is that 
 a large read can be sped up by hiding the latency of the seek if the data is in cache.
@@ -175,9 +175,10 @@ In our experience and testing, this was a very large hindrance to performance in
 workloads that mimic the many file read operations from Titan's compute nodes. This 
 is due to the algorithm caching the wrong data, having to invalidate the cache, 
 seek to the location on disk, cache that data, and then repeat with the next read 
-request. 
+request. By disabling the read-ahead cache, we dramatically lower the latency of 
+the non-sequential read requests we see in the production environment. 
 
-\item ReACT\textsuperscript{TM}
+\item
 The Real-time Adaptive Cache Technology (ReACT\textsuperscript{TM})\cite{ReACT} feature was developed
 to make the SFA platforms more attractive from an IOPS perspective. The feature's main goal 
 is to speed up the performance of the large 1MB write requests, avoiding caching the I/O on the 
@@ -187,8 +188,12 @@ Spider 1 was constructed of. In earlier versions of the product you could either
 your cache on the partner controller for data resilience in the face of controller 
 failure, or you could disable the cache and get performance for the large streaming 1MB 
 (or larger) writes. ReACT gives a framework where the best of both worlds can exist. 
-We feel that this feature has allowed Spider 2 to reach the low latencies across the
-spectrum of write request sizes and is a large benefit to our users. 
+A 1MB write can be written directly to disk, which is the lowest latency possible for 
+that operation. A 4kB can be written into controller cache and also mirrored to the 
+partner controller in about the same amount of time, which is far faster than 
+committing that operation to the disk. We feel that this feature has allowed 
+Spider 2 to reach the low latencies across the spectrum of write request sizes 
+and is a large benefit to our users. 
 
 \end{itemize}
 

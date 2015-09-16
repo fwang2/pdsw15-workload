@@ -7,7 +7,8 @@ for 5 years, and was decommissioned in 2013. Our analysis of Spider 1 I/O
 workload was presented in~\cite{spider1-workload}. 
 
 The OLCF deployed Spider 2 file system in 2012~\cite{spider2}. Spider 2 is also
-a center-wide shared resource and serves all current OLCF platforms, including the Titan supercomputer~\cite{titan}.
+a center-wide shared resource and serves all current OLCF platforms, including
+the Titan supercomputer~\cite{titan}.
 
 Both Spider 1 and 2 were architected, deployed, and operated by the OLCF staff.
 Both file systems use the Lustre technology~\cite{Lustre}.
@@ -32,7 +33,8 @@ are 288 total Lustre OSSes, and 2,106 Lustre OSTs in Spider 2.
 
 These resources are organized in two separate name spaces in Spider 2. These
 namespaces are identified as ``atlas 1'' and ``atlas 2.'' Namespaces are built
-on non-overlapping Spider 2 hardware resources. Figure~\ref{fig:arch} shows the conceptual Spider 2 architecture. 
+on non-overlapping Spider 2 hardware resources. Figure~\ref{fig:arch} shows the
+conceptual Spider 2 architecture. 
 
 Spider 2 storage system was rated and tested for 1.4 TB/s aggregate read and
 1.2 TB/s write performance. At the Lustre file system level these translate
@@ -57,15 +59,22 @@ originally and later updated for Spider 2.
 \label{fig:arch}
 \end{figure}
 
-\begin{table}{h!}
+\begin{table}
 \begin{center}
+\caption{Spider 1 and Spider 2 key specifications}
 \begin{tabular}{l||l|l}
- Spec & Spider 1 & Spider 2\\
+ & Spider 1 & Spider 2\\
 \hline
-Bandwidth & 240 GB/s & 1 TB/s \\
-\
+Bandwidth & 240 GB/s & +1 TB/s \\
 Capacity & 10 PB & 32 PB \\
-Addmore \\
+RAID Controllers & DDN S2A9900 & DDN SFA12KX\\
+Disk type & SATA & Near-line SAS\\
+Number of disks & 13,440 & 20,160\\
+Disk redundancy & RAID 6 (8+2) & RAID 6 (8+2)\\
+Number of OSTs & 1,344 & 2,016\\
+Number of OSSs & 192 & 288\\
+Lustre version & 1.8 & 2.5\\
+Connectivity & IB DDR & IB FDR\\ 
 \end{tabular}
 \end{center}
 \label{table:spider12}
@@ -73,5 +82,21 @@ Addmore \\
 
 
 \subsection{Monitoring tool}
-DDNTool \cite{ddntool10:ross} was developed to monitor the DDN S2A and SFA storage system RAID controllers. Since the two DDN architectures have very different monitoring API's, there are actually two completely separate programs:  DDNTool for the S2A architecture and DDNTool\_v2 for the SFA architecture.  The two tools are very different in their implementations - DDNTool is a C++ program that communicates with the disk controllers directly over TCP/IP while DDNTool\_v2 is a Python program that interfaces with a vendor-supplied python library which handles the low level communication - but they both accomplish the same basic task.  The tools poll each controller for various pieces of information (e.g. I/O request sizes, write and read bandwidths) at regular rates and store this information in a MySQL database.  The database is not actually used for long term storage.  In fact, at each poll interval, the old data is overwritten with new data.  By storing a the data in a database, though, the data is available to numerous clients via a well-documented API.  This allows multiple users to search and query in real-time.
+
+DDNTool \cite{ddntool10:ross} was developed to monitor the DDN S2A and SFA
+storage system RAID controllers. Since the two DDN architectures have very
+different monitoring API's, there are actually two completely separate
+programs:  DDNTool for the S2A architecture and DDNTool\_v2 for the SFA
+architecture.  The two tools are very different in their implementations -
+DDNTool is a C++ program that communicates with the disk controllers directly
+over TCP/IP while DDNTool\_v2 is a Python program that interfaces with a
+vendor-supplied python library which handles the low level communication - but
+they both accomplish the same basic task.  The tools poll each controller for
+various pieces of information (e.g. I/O request sizes, write and read
+bandwidths) at regular rates and store this information in a MySQL database.
+The database is not actually used for long term storage.  In fact, at each poll
+interval, the old data is overwritten with new data.  By storing a the data in
+a database, though, the data is available to numerous clients via a
+well-documented API.  This allows multiple users to search and query in
+real-time.
 

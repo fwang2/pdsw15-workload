@@ -135,6 +135,20 @@ whereas on Spider 1 over 45\% of writes where either 512kB or 1MB. <Have no expl
 
 \subsubsection{Request Size Latency distribution}
 
+With the new DDN SFA API, now we have the capability of collecting I/O request
+service latencies. Figure {fig:spider1-reqLat} shows Spider 2 request service
+latency distributions. Service latency here includes the total sum of the time
+spent on the queue and the time spent on fetching/putting data from/to the
+disk. As can be seen from the figure, 90\% of reads and more than 80\% write
+requests are serviced at most in 16ms and this is the finest granularity the
+DDN API can provide. 
+
+--readahead cache settings
+--react cache settings
+
+  
+
+
 \begin{figure}[!t]
 \centering
 \begin{tabular}{cc}

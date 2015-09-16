@@ -64,13 +64,28 @@ be exercised with roughly equivalent I/O workloads.
 
 \subsubsection{Peak Bandwidth Usage}
 
+Figure~\ref{fig:ddnpeakBW} (a) and Figure~\ref{fig:ddnpeakBW}(b), shows the peak
+read and write bandwidth observed at the DDN RAID controllers for Spider 1 and Spider 2, respectively.
+
+On Spider 1, the peak read bandwidth observed was 90\% of the maximum on the RAID
+controllers. The maximum aggreagatec( combined read and write) bandwidth of 3
+GB/s for the controller on Spider 1, and 36GB/s for the controllers on Spider 2. 
+The write peaked at 50\% for Spider 1. On Spider 2 the reads peaked at
+80% of the capacity. However, on Spider 2 the controllers peaked at 70% of their maximum
+for writes. 
+
+This is could be atrributed to the gemini interconnect, increased I/O ROUTERS.  
+ 
+
+
 \begin{figure}[!thb]
 \begin{center}
 \begin{tabular}{c}
-{\includegraphics[width=0.50\textwidth]{./figs/spider1-bw-perc-max.eps}}\\
+\hspace*{-1cm}                                                           
+{\includegraphics[width=0.450\textwidth]{./figs/spider1-bw-perc-max.eps}}\\
 {(a) Spider 1}\\
 \\
-{\includegraphics[width=0.50\textwidth]{./figs/spider2-bw-perc-max.eps}}\\
+{\includegraphics[width=0.450\textwidth]{./figs/spider2-bw-perc-max.eps}}\\
 {(b) Spider 2}\\
 \end{tabular}
 \vspace{-0.1in}
@@ -79,7 +94,22 @@ be exercised with roughly equivalent I/O workloads.
 \end{center}
 \end{figure}
 
-\subsubsection{Spider 2 Usage Status}
+\subsubsection{Spider 2 Usage Stats}
+
+Figure~\ref{fig:bwUsage}, shows the aggregate bandwidth, sum of read and write bandwidth,
+observed during the uptime of the storage server. Though the theoritical peak of the storage system is
+over 1 TB/s, practically we can expect a max of .....
+  
+We see that more for more than 95% of the storage uptime the
+bandwidth was less than 50 GB/s. Only around 4% of the time the bandwidth was
+over 50 GB/s. For less than 1 % of the time the bandwidth peaked over 250GB/s. 
+
+This is expected, as typically scientific applications are compute intensive,
+with I/O less than 5% of their compute time and occur in bursts. Also, say
+we sustain a bandwidth of 250GB/s for 10 minutes in a day, which is 0.69%, we
+will be generating 146TB's of data.
+
+From Figure~\ref{fig:storageUsage}, we see the storage space utilization on the system, with more 50% of the capacity being used. 
 
 \begin{figure}[!thb]
 \begin{center}
@@ -253,14 +283,13 @@ and is a large benefit to our users.
 \begin{center}
 \begin{tabular}{cc}
 \hspace*{-1cm}                                                           
-{\includegraphics[width=0.24\textwidth]{./figs/spider2-reqLatCDF.eps}}&
+{\includegraphics[width=0.27\textwidth]{./figs/spider2-reqLatCDF.eps}}&
 \hspace{-2mm}
-{\includegraphics[width=0.24\textwidth]{./figs/spider2-reqLatPDF.eps}}\\
+{\includegraphics[width=0.27\textwidth]{./figs/spider2-reqLatPDF.eps}}\\
 \small (a) CDF & \small(b) PDF \\
 \end{tabular}
 \vspace{-0.1in}
-\caption{Spider 2 - Distribution of Request Sizes}
-\label{fig:spider2-reqsizedist}
+\caption{Spider 2 - Distribution of Request Service Time(latency)}
 \end{center}
 \end{figure}
 

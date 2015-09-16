@@ -9,9 +9,9 @@ Comparing the trends observed in Spider I vs Spider II
 
 \subsection{I/O Usage Trends}
 
+\subsubsection{Read vs Write}
 
-
-\subsubsection{Atlas1 and Atlas2 Utilization}
+%\subsubsection{Atlas1 and Atlas2 Utilization}
 In Figure~\ref{fig:rwratio} there is a slight imbalance in the total write 
 requests for 50\% of the controllers sampled. This imbalance is because the upper 
 level file systems are imbalanced. As we stated above we deployed to file system 
@@ -22,7 +22,6 @@ In general we see a higher percentage of write operations on Spider 2 as compare
 to Spider 1. This meets our design expectations for handling large memory checkpoints
 with a minimal reading of those checkpoint data files.
 
-\subsubsection{Read vs Write}
 
 Figure~\ref{fig:rwratio} shows the read and write ratios on Spider 1 and 2
 storage systems. As can be seen, on Spider 1 60\% of the I/O workload was write
@@ -59,6 +58,25 @@ be exercised with roughly equivalent I/O workloads.
 \label{fig:rwratio}
 \end{center}
 \end{figure}
+
+\subsubsection{Peak Bandwidth Utilization}
+
+\begin{figure}[!thb]
+\begin{center}
+\begin{tabular}{c}
+{\includegraphics[width=0.60\textwidth]{./figs/spider1-bw-perc-max.eps}}\\
+{(a) Spider 1}\\
+{\includegraphics[width=0.60\textwidth]{./figs/spider2-bw-perc-max.eps}}\\
+{(b) Spider 2}\\
+\end{tabular}
+\vspace{-0.1in}
+\caption{Peak bandwidth usage at the RAID controllers}
+\label{fig:ddnpeakBW}
+\end{center}
+\end{figure}
+
+\subsubsection{Bandwidth Distribution}
+
 
 
 \subsection{I/O Requests}
@@ -220,6 +238,6 @@ and is a large benefit to our users.
 
 
 
-\subsection{Request Size vs Bandwidth}
+%\subsection{Request Size vs Bandwidth}
 
  

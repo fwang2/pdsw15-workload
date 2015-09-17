@@ -100,8 +100,7 @@ normal production workloads, the file system is exercised by random mixed I/O
 workloads. Our earlier tests showed that a single NL-SAS disk drive can achieve
 20-25\% of its peak performance under random I/O workloads (with 1 MB I/O block
 sizes). Extrapolating from that point, the expected Spider 2 performace should be 
-at most 250 GB/s under such bursty production workloads~\cite{bestpractices}.
-
+at most 250 GB/s under such bursty production workloads.~\cite{bestpractices}.
 
 As can be seen from the Figure~\ref{fig:bwUsage}, more than 95\% of the 
 observed bandwidth was less than 50 GB/s. Around 4\% of the time the bandwidth
@@ -226,15 +225,17 @@ again that the Application workload of the OLCF is different enough at the
 times of measurement to show this difference in the distribution.
 
 \item   On Spider 1, we observed a large number of 512kB requests for both read
-and write requests. This was due to problems in the dm-multipath \cite{mpath}
+and write requests. This was due to problems in the {\tt dm-multipath} \cite
+{mpath}
 package that was available for the version of the Linux operating system that
 was employed. This version had a bug that broke up a 1024kB I/O request into 2
 512kB requests. Later versions addressed this performance problem by not
 breaking up the I/O request. Additionally the I/O request scheduler that was
 used on Spider 1 was ``deadline'' which allowed the kernel to re-order some I/O
-requests.  In 2011 Spider 1 was moved to the ``noop'' scheduler, and this
+requests.  In 2011 Spider 1 was moved to the  {\tt noop} scheduler, and this
 phenomenon disappeared. We see the same drop in 512kB requests for Spider 2 as
-well. Finally, changes to the ib\_srp kernel module allow more queued requests
+well. Finally, changes to the {\tt ib\_srp} kernel module allow more queued
+requests
 and better memory handling of a larger queue through scatter\/gather tables.
 This allowed fully queuing 1024kB requests and pushing them all the way to the
 DDN controller. As a result of these 3 changes the number of 512kB requests

@@ -21,7 +21,7 @@ resources. The file systems are allocated across projects at the OLCF and some
 projects have been heavier I/O consumers than others; it turns out that the
 ``atlas1'' partition is being utilized at a higher rate.  In general we see a
 higher percentage of write operations on Spider 2 as compared to Spider 1. This
-meets our design expectations for handling large memory checkpoints with a
+meets our design expectations for handling large memory checkpoints with 
 minimal reading of those checkpoint data files.
 
 
@@ -32,20 +32,15 @@ across all OLCF platforms, and high percent of the read requests was attributed
 to analysis and data transfer I/O workloads accessing Spider 1. 
 
 Spider 2 is also a center-wide shared resource, and a similar trend can be
-observed. However, the percent of reads on Spider 2 is less compared to Spider
-1, and they amount to roughly 25\%. This can be attributed to large-data
+observed. However, compared to Spider 1 there are fewere read operations amounting
+to roughly 25\% of all operations. This can be attributed to large-data
 transfers into Spider 2 from various resources currently going on for later
 processing on Titan. Also it is quite visible in Figure~\ref{fig:rwratio}(b)
-that Atlas1 portion of the Spider 2 is 10\% more write-intensive than the
-Atlas2 (left half vs. the right half of the Figure~\ref{fig:rwratio}(b). This
-discrepancy is due to a user project allocation problem we encountered early
-on. User projects were categorized in terms of science domains and expected I/O
-requirements equally on Atlas1 and Atlas2 portions when Spider 2 was turned
-into production. However, our expectation did not materialize completely, and
-since then we have been observing more I/O on Atlas1 compared to Atlas2. We
-have taken steps (e.g. moving some user projects from Atlas1 to Atlas2) to
-rectify this mismatch and over the time it is expected that both portions will
-be exercised with roughly equivalent I/O workloads. 
+that ``atlas1'' portion of Spider 2 is 10\% more write-intensive than the
+Atlas2 (left half vs. the right half of the Figure~\ref{fig:rwratio}(b). 
+This discrepancy is due to a failure in the method of deploying user projects 
+between file system namespaces. The allocation method has been corrected and 
+the trend is moving twoard the expected balance. 
 
 \begin{figure}[!t]
 \begin{center}
@@ -63,22 +58,19 @@ be exercised with roughly equivalent I/O workloads.
 
 \subsubsection{Peak Bandwidth Usage}
 
-Figure~\ref{fig:ddnpeakBW} (a) and Figure~\ref{fig:ddnpeakBW}(b), shows the
+Figure~\ref{fig:ddnpeakBW} (a) and Figure~\ref{fig:ddnpeakBW}(b), show the
 peak read and write bandwidth observed at the DDN RAID controllers for Spider 1
 and Spider 2, respectively. 
 
-As can be seen, on Spider 1, the peak read bandwidth observed was 90\% of the
-maximum on the S2A9900 RAID controllers, which was 3 GB/s per SSU. The maximum
-bandwidth for Spider 2 SFA12KX is 36 GB/s and we observed 80\% of the peak
-value. For writes, the bandwidth observed was 50\% for Spider 1 and 70\% for
-Spider 2 controllers. 
- 
-These values show us that, our read I/O workloads slightly getting lower of the
-peak value, however, our writes on Spider 2 is more of the peak. This can be
-attributed to better formed write I/O being issued from the Titan
-supercomputer. While the exact reasons for this is under the investigation, we
-believe the middleware libraries such as ADIOS~\cite{adios} are helping to
-improve the I/O characteristics. 
+In Figure~\ref{fig:ddnpeakBW}(b) the peak read bandwidth observed was 90\% of the
+maximum for Spider 1 (3 GB/s); we observred 80\% of the maximum bandwidth for 
+Spider 2 (36 GB/s). For writes, the bandwidth observed was 50\% for Spider 1 and 70\% for
+Spider 2 controllers. These values show us that our read I/O workloads are getting a 
+slightly lower peak value of the overall percentage. The silver-lining is that the write
+operations on Spider 2 are obtaining a higher percentage of the peak performance. This can be
+attributed to better formed write I/O being issued from the Titan supercomputer. While 
+the exact reasons for this is under the investigation, we believe the middleware 
+libraries such as ADIOS~\cite{adios} are helping to improve the I/O characteristics. 
 
 
 \begin{figure}[!thb]
@@ -103,21 +95,23 @@ Figure~\ref{fig:bwUsage}, shows the aggregate bandwidth (i.e. the sum of read
 and write bandwidth) observed on Spider 2. We do not have a comparable data set
 for Spider 1, however, we think it is useful to share the Spider 2 data. 
 
-Spider 2 system was rated for +1 TB/s at the file system level, if exercised
-with well-formed, large, sequential I/O on a quiet system. However, under
+Spider 2 system was designed to deliver greater than 1 TB/s at the file system level, 
+if exercised with well-formed, large, sequential I/O on a quiet system. However, under
 normal production workloads, the file system is exercised by random mixed I/O
 workloads. Our earlier tests showed that a single NL-SAS disk drive can achieve
 20-25% of its peak performance under random I/O workloads (with 1 MB I/O block
-sizes). Therefore, the Spider 2 system was expected to perform roughly at 250
-GB/s under bursty production workloads~\cite{bestpractices}.
+sizes). Extrapolating from that point the expected Spider 2 performace should be 
+at most 250 GB/s under the bursty production workloads~\cite{bestpractices}.
 
 
-As can be seen from the Figure~\ref{fig:bwUsage}, for more than 95\% of the the
+As can be seen from the Figure~\ref{fig:bwUsage}, more than 95\% of the 
 observed bandwidth was less than 50 GB/s. Around 4\% of the time the bandwidth
 was over 50 GB/s. For less than 1\% of the time the bandwidth peaked over
 250 GB/s. These values are in line with the design goals of Spider 2, as
 typically scientific applications are compute intensive, with performing bursts
-of I/O less than 5\% of their compute time allocations. This suggests that our scientific workloads can benefit from a burst buffer storage layer to absorb these bursty I/O patterns.
+of I/O less than 5\% of their compute time allocations. This suggests that these 
+mixed workloads could benefit from a burst buffer storage layer to absorb and align 
+their I/O.
 
 Figure~\ref{fig:storageUsage} shows the Spider 2 space utilization. As can be
 seen, currently, more than 50\% of the capacity being used.  For a sustained a

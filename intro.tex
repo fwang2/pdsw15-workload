@@ -10,9 +10,9 @@ deployed different HPC architectures that are 10 to 100 times more powerful
 than typical research computing systems. The OLCF currently hosts Titan,
 world's second fastest supercomputer~\cite{titan}, as well as a number of a
 number of analysis and visualization platforms. The OLCF is a leader in large-scale
-parallel file system development, deployment, and continuous operation. In the
+parallel file system development, design, deployment, and continuous operation. In the
 last decade, the OLCF has designed and deployed two large-scale center-wide
-parallel file systems, namely, Spider 1 and Spider 2 systems~\cite{spider1,
+parallel file systems, namely, the Spider 1 and Spider 2 systems~\cite{spider1,
 spider2}.
 
 An understanding of current storage system workload is critical for
@@ -22,7 +22,7 @@ storage server~\cite{hpca04:zhang, iiswc08:swaroop}; characterizing disk level
 traces~\cite{ sigmetrics09:alma}, and a number studies on enterprise I/O
 workloads~\cite{gmach2007workload, hpca04:zhang}. There have been very limited
 studies on the characterization of HPC storage system workloads with trace data
-collected from the backend servers. However, a number of HPC workload
+collected from the backend storage controllers. However, a number of HPC workload
 characterization studies have focused on I/O characterization from a scientific
 application perspective by instrumenting application code for I/O trace
 collection~\cite{ iasds09:philip, shan2008characterizing}. Nevertheless, these
@@ -35,12 +35,13 @@ workloads on our first center-wide parallel file system, Spider 1. The lessons
 learned from that study helped us in the design and deployment of our next file
 system, Spider 2. In the current work we do a comparative study of the workload
 characteristics of our storage system as we scaled from Spider 1, a 240 GB/s
-10 Petabyte, to Spider 2, a +1 TB/s, 32 Petabyte storage system.
+10 Petabyte, to Spider 2, a +1 TB/s, 32 Petabyte storage system serving over 
+20,000 filesystem clients at the OLCF.
 
-In this paper, we characterize the I/O workload of Spider 2, a center-wide
-storage system providing 32 PB of capacity and an aggregate I/O bandwidth in
-excess of 1 TB/s to over 20,000 file system clients on Titan and the other OLCF
-compute, analysis, and visualization resources. 
+%In this paper, we characterize the I/O workload of Spider 2, a center-wide
+%storage system providing 32 PB of capacity and an aggregate I/O bandwidth in
+%excess of 1 TB/s to over 20,000 file system clients on Titan and the other OLCF
+%compute, analysis, and visualization resources. 
 %Our work is a follow-up of our previous effort, which analyzed the I/O workload
 %on the Spider 1 file system~\cite{spider1-workload}. 
 We collected and analyzed file and storage system data from a large-scale production scientific

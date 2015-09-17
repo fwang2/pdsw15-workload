@@ -8,7 +8,7 @@ accelerating major scientific discoveries and engineering breakthroughs for
 humanity, in partnership with the computational science community. The OLCF has
 deployed different HPC architectures that are 10 to 100 times more powerful
 than typical research computing systems. The OLCF currently hosts Titan,
-world's second fastest supercomputer~\cite{titan}, as well as a number of a
+world's second fastest supercomputer~\cite{titan}, as well as a
 number of analysis and visualization platforms. The OLCF is a leader in large-scale
 parallel file system development, design, deployment, and continuous operation. In the
 last decade, the OLCF has designed and deployed two large-scale center-wide
@@ -21,22 +21,22 @@ storage subsystems. A number of characterization studies have been done at the
 storage server~\cite{hpca04:zhang, iiswc08:swaroop}; characterizing disk level
 traces~\cite{ sigmetrics09:alma}, and a number studies on enterprise I/O
 workloads~\cite{gmach2007workload, hpca04:zhang}. There have been very limited
-studies on the characterization of HPC storage system workloads with trace data
-collected from the backend storage controllers. However, a number of HPC workload
-characterization studies have focused on I/O characterization from a scientific
-application perspective by instrumenting application code for I/O trace
-collection~\cite{ iasds09:philip, shan2008characterizing}. Nevertheless, these
-studies have proven useful in understanding the application workloads for
-architecting storage systems. Our study is a unique in a way that we are using
-the traces collected at the backend RAID controller to understand scientific
-user workloads and for provisioning storage system resources. Our prior work
-~\cite{ spider1-workload} was on the characterization and study of the
-workloads on our first center-wide parallel file system, Spider 1. The lessons
-learned from that study helped us in the design and deployment of our next file
-system, Spider 2. In the current work we do a comparative study of the workload
-characteristics of our storage system as we scaled from Spider 1, a 240 GB/s
-10 Petabyte, to Spider 2, a +1 TB/s, 32 Petabyte storage system serving over 
-20,000 filesystem clients at the OLCF.
+studies on the characterization of HPC storage system workloads with trace
+data collected from the backend storage controllers. However, a number of HPC
+workload characterization studies have focused on I/O characterization from a
+scientific application perspective by instrumenting application code for I/O
+trace collection~\cite{ iasds09:philip, shan2008characterizing}. Nevertheless,
+these studies have proven useful in understanding the application workloads
+for architecting storage systems. Our study is a unique in a way that we are
+using the traces collected at the backend RAID controller to understand
+scientific user workloads and for provisioning storage system resources. Our
+prior work ~\cite{ spider1-workload} was on the characterization and study of
+the workloads on our first center-wide parallel file system, Spider 1. The
+lessons learned from that study helped us in the design and deployment of our
+next file system, Spider 2. In this paper, we present a comparative study of
+the workload characteristics of our storage system as we scaled from Spider 1,
+a 240 GB/s 10 Petabyte, to Spider 2, a +1 TB/s, 32 Petabyte storage system
+serving over 20,000 filesystem clients at the OLCF.
 
 %In this paper, we characterize the I/O workload of Spider 2, a center-wide
 %storage system providing 32 PB of capacity and an aggregate I/O bandwidth in
@@ -44,9 +44,9 @@ characteristics of our storage system as we scaled from Spider 1, a 240 GB/s
 %compute, analysis, and visualization resources. 
 %Our work is a follow-up of our previous effort, which analyzed the I/O workload
 %on the Spider 1 file system~\cite{spider1-workload}. 
-We collected and analyzed file and storage system data from a large-scale production scientific
-supercomputing complex. Our data and analysis provides useful insights on the
-I/O patterns, in particular I/O bandwidth and request size distributions. Our
-observations and analysis is benefical to the larger community and can be used
-in building more efficient next-generation large-scale storage systems for
-scientific workloads.  
+We collected and analyzed file and storage system data from a large-scale
+production scientific supercomputing complex. Our data and analysis provides
+useful insights on the I/O patterns, in particular I/O bandwidth and request
+size distributions. Our observations and analysis are beneficial to the larger
+community and can be used in building more efficient next-generation large-
+scale storage systems for scientific workloads.

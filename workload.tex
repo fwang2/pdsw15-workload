@@ -178,39 +178,41 @@ This helps maintain a utilization less than 75\% on the Spider 2 system.
 \end{center}
 \end{figure}
 
-Figure~\ref{fig:spider1-reqsizedist} and Figure~\ref{fig:spider2-reqsizedist}
-shows the distribution of read and write requests on Spider 1 and Spider 2,
+Figures~\ref{fig:spider1-reqsizedist} and \ref{fig:spider2-reqsizedist}
+show the distribution of read and write requests on Spider 1 and Spider 2,
 respectively. As can be seen, there are differences. The Lustre file system
 supports a range of request block sizes, the smallest being 4 kilobytes (kB)
 and the largest being 4 Megabytes (MB).  However, on Spider 1, the smallest
 block size we were able to monitor was 16KB, a limitation of the DDN RAID
 controller. Interpreting from the CDF and PDF plots here are some interesting
-observation.
+observations:
 
 \begin{itemize}
 
-\item  60\% of write requests on Spider 2 are 4kB or less.  In Spider 1, we
-unable to distinguish between the 4kB, 8kB and 16kB, which accounted for 50\%
+\item  60\% of write requests on Spider 2 are 4kB or less.  In Spider 1, we were
+unable to distinguish between the 4kB, 8kB and 16kB sizes, which accounted for 50\%
 of the write requests. Accounting for this and comparing Spider 1 and 2 file
 size distributions, it can be seen that there are 10\% more small block
-requests (i.e.  smaller than 8kB) on Spider 2, for write operations. Please
+requests (i.e.  smaller than 8kB) on Spider 2 for write operations. Please
 remember that these are directly obtained from the DDN controllers not from the
-file system. One possible explanation for this increase can be due to the local
-file system (ldiskfs) metadata operations. Other possible explanation can be
-the controller-level background disk integrity check (i.e. scrubbing) events.
-Exact cause of this increase is unknown at this point and it is being
+file system. One possible explanation for this increase could be an increase in the local
+file system (ldiskfs) metadata operations. Another possible explanation could be an
+increase in the number of controller-level background disk integrity check 
+(i.e. scrubbing) events.
+The exact cause of this increase is unknown at this point and it is being
 investigated.  For read operations, Spider 1 and Spider 2 behave the same for
-small files, the distribution has not changed.
+small files; the distribution has not changed.
 
-\item  For writes, Spider 2 has 70\% of the requests which are less than or
-equal to 512kB, whereas on Spider 1, only 55\% of the requests were less than
-512kB. It is worth noting that the data presented in this paper are gathered in
-different years, the application versions have changed, and there are a
+\item  For writes, 70\% of the requests on Spider 2 are less than or
+equal to 512kB, whereas on Spider 1 only 55\% of the requests were less than
+or equal to 512kB. It is worth noting that the data presented in this paper are
+ gathered in
+different years, the application versions have changed, and there was a
 different mix of applications running as the data were collected. The OLCF
 traditionally has a large mix of applications that have well-formed I/O or are
 using middleware libraries such as ADIOS \cite{adios}. The latest round of
 applications do not have this robustness in their I/O patterns, and have shown
-to have some pathological tendencies; these smaller files and request sizes
+to have some pathological tendencies. These smaller files and request sizes
 that are more focused on read operations are large performance drains on a
 system that was designed to perform 1MB sequential write and read I/O
 operations. 
@@ -227,16 +229,16 @@ and write requests. This was due to problems in the {\tt dm-multipath} \cite
 package that was available for the version of the Linux operating system that
 was employed. This version had a bug that broke up a 1024kB I/O request into 2
 512kB requests. Later versions addressed this performance problem by not
-breaking up the I/O request. Additionally the I/O request scheduler that was
-used on Spider 1 was ``deadline'' which allowed the kernel to re-order some I/O
-requests.  In 2011 Spider 1 was moved to the  {\tt noop} scheduler, and this
+breaking up the I/O request. Additionally Spider 1 used the {\tt deadline} I/O
+request scheduler which allowed the kernel to re-order some I/O
+requests.  In 2011, Spider 1 was moved to the  {\tt noop} scheduler, and this
 phenomenon disappeared. We see the same drop in 512kB requests for Spider 2 as
 well. Finally, changes to the {\tt ib\_srp} kernel module allow more queued
 requests
 and better memory handling of a larger queue through scatter\/gather tables.
 This allowed fully queuing 1024kB requests and pushing them all the way to the
 DDN controller. As a result of these 3 changes the number of 512kB requests
-have dramatically been reduced for Spider 2.  \end{itemize}
+have been dramatically reduced for Spider 2.  \end{itemize}
 
 \subsubsection{Request Size Latency distribution}
 

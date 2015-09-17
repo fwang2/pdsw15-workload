@@ -18,28 +18,25 @@ requests for 50\% of the controllers sampled in the Spider 2 system. This
 imbalance is because the upper level file systems are imbalanced. As we stated
 above, we deployed two file system namespaces on  non-overlapping hardware
 resources. The file systems are allocated across projects at the OLCF and some
-projects have been heavier I/O consumers than others. It turns out that the
-``atlas1'' partition is being utilized at a higher rate.  In general we see a
-higher percentage of write operations on Spider 2 as compared to Spider 1. This
-meets our design expectations for handling large memory checkpoints with 
-minimal reading of those checkpoint data files.
-
-As can be seen in Figure~\ref{fig:rwratio}, approximately 60\% of
-the I/O workload on Spider 1 was write
-operations and 40\% was reads. Spider 1 was a center-wide resource shared
-across all OLCF platforms and the high percentage of the read requests was attributed
-to analysis and data transfer I/O workloads accessing Spider 1. 
-Spider 2 is also a center-wide shared resource, but it has a higher percentage of write operations than Spider 1 (approximately 75\% vs. approximately 60\%).
-This can be attributed to a number of large data
-transfers into Spider 2 from various resources prior to processing that data on Titan.
-
-Also, it is quite visible in Figure~\ref{fig:rwratio}(b)
+projects have been heavier I/O consumers than others, and we have observed 
+that some projects are transferring large datasets to the OLCF for processing 
+on Titan. It turns out that the ``atlas1'' partition is being utilized at a 
+higher rate.  In general we see a higher percentage of write operations on 
+Spider 2 as compared to Spider 1. This meets our design expectations for 
+handling large memory checkpoints with  minimal reading of those checkpoint 
+data files. Also, it is quite visible in Figure~\ref{fig:rwratio}(b)
 that ``atlas1'' portion of Spider 2 is 10\% more write-intensive than the
 Atlas2 (left half vs. the right half of the Figure~\ref{fig:rwratio}(b). 
-This discrepancy is due to some incorrect assumptions that were made when
-deciding how to distribute user projects 
-between the file system namespaces. The allocation method has since been corrected and 
-the trend is moving back toward the expected balance. 
+This discrepancy is due to the same factors and since being corrected the 
+trend is moving back toward the expected balance. Finally, as can be seen 
+in Figure~\ref{fig:rwratio}, approximately 60\% of the I/O workload on 
+Spider 1 was write operations and 40\% was reads. Spider 1 was a center-wide 
+resource shared across all OLCF platforms and the high percentage of the read 
+requests was attributed to analysis and data transfer I/O workloads accessing 
+Spider 1. Spider 2 is also a center-wide shared resource, but it has a higher 
+percentage of write operations than Spider 1 (approximately 75\% vs. 
+approximately 60\%), we have concluded that the way the system is being 
+used accounts for the differences.  
 
 \begin{figure}[!t]
 \begin{center}
@@ -94,32 +91,33 @@ Figure~\ref{fig:bwUsage}, shows the aggregate bandwidth (i.e. the sum of read
 and write bandwidth) observed on Spider 2. We do not have a comparable data set
 for Spider 1, however, we think it is useful to share the Spider 2 data. 
 
-Spider 2 system was designed to deliver greater than 1 TB/s at the file system level, 
+The Spider 2 file system was designed to deliver greater than 1 TB/s at the file system level 
 if exercised with well-formed, large, sequential I/O on a quiet system. However, under
 normal production workloads, the file system is exercised by random mixed I/O
 workloads. Our earlier tests showed that a single NL-SAS disk drive can achieve
 20-25\% of its peak performance under random I/O workloads (with 1 MB I/O block
-sizes). Extrapolating from that point the expected Spider 2 performace should be 
-at most 250 GB/s under the bursty production workloads~\cite{bestpractices}.
-
+sizes). Extrapolating from that point, the expected Spider 2 performace should be 
+at most 250 GB/s under such bursty production workloads.~\cite{bestpractices}.
 
 As can be seen from the Figure~\ref{fig:bwUsage}, more than 95\% of the 
 observed bandwidth was less than 50 GB/s. Around 4\% of the time the bandwidth
 was over 50 GB/s. For less than 1\% of the time the bandwidth peaked over
 250 GB/s. These values are in line with the design goals of Spider 2, as
-typically scientific applications are compute intensive, with performing bursts
-of I/O less than 5\% of their compute time allocations. This suggests that these 
+typical scientific applications are compute intensive and perform
+I/O in bursts that total less than 5\% of their compute time allocations. This suggests that these 
 mixed workloads could benefit from a burst buffer storage layer to absorb and align 
 their I/O.
 
 Figure~\ref{fig:storageUsage} shows the Spider 2 space utilization. As can be
-seen, currently, more than 50\% of the capacity is being used.  For a sustained a
+seen, more than 50\% of the capacity is currently being used.  For a sustained a
 bandwidth of 250 GB/s (peak random production bandwidth) for 10 minutes in a
 day, 146 TBs of data will be generated. Given the 32 PB aggregate capacity of
 Spider 2, this will consume all space on Spider 2 in less than a year. To
 prevent this, OLCF employs a ``purge'' policy. Periodically, files with a
 timestamp older than 14 days are deleted from the Spider 2 scratch file system.
-This helps maintain a utilization less than 75\% on the Spider 2 system.  
+This helps maintain a utilization less than 75\% on the Spider 2 system as we 
+have performance degredation when file system utilization is higher than that 
+point.  
 
 \begin{figure}[!thb]
 \begin{center}
@@ -182,39 +180,41 @@ This helps maintain a utilization less than 75\% on the Spider 2 system.
 \end{center}
 \end{figure}
 
-Figure~\ref{fig:spider1-reqsizedist} and Figure~\ref{fig:spider2-reqsizedist}
-shows the distribution of read and write requests on Spider 1 and Spider 2,
+Figures~\ref{fig:spider1-reqsizedist} and \ref{fig:spider2-reqsizedist}
+show the distribution of read and write requests on Spider 1 and Spider 2,
 respectively. As can be seen, there are differences. The Lustre file system
 supports a range of request block sizes, the smallest being 4 kilobytes (kB)
 and the largest being 4 Megabytes (MB).  However, on Spider 1, the smallest
 block size we were able to monitor was 16KB, a limitation of the DDN RAID
 controller. Interpreting from the CDF and PDF plots here are some interesting
-observation.
+observations:
 
 \begin{itemize}
 
-\item  60\% of write requests on Spider 2 are 4kB or less.  In Spider 1, we
-unable to distinguish between the 4kB, 8kB and 16kB, which accounted for 50\%
+\item  60\% of write requests on Spider 2 are 4kB or less.  In Spider 1, we were
+unable to distinguish between the 4kB, 8kB and 16kB sizes, which accounted for 50\%
 of the write requests. Accounting for this and comparing Spider 1 and 2 file
 size distributions, it can be seen that there are 10\% more small block
-requests (i.e.  smaller than 8kB) on Spider 2, for write operations. Please
+requests (i.e.  smaller than 8kB) on Spider 2 for write operations. Please
 remember that these are directly obtained from the DDN controllers not from the
-file system. One possible explanation for this increase can be due to the local
-file system (ldiskfs) metadata operations. Other possible explanation can be
-the controller-level background disk integrity check (i.e. scrubbing) events.
-Exact cause of this increase is unknown at this point and it is being
+file system. One possible explanation for this increase could be an increase in the local
+file system (ldiskfs) metadata operations. Another possible explanation could be an
+increase in the number of controller-level background disk integrity check 
+(i.e. scrubbing) events.
+The exact cause of this increase is unknown at this point and it is being
 investigated.  For read operations, Spider 1 and Spider 2 behave the same for
-small files, the distribution has not changed.
+small files; the distribution has not changed.
 
-\item  For writes, Spider 2 has 70\% of the requests which are less than or
-equal to 512kB, whereas on Spider 1, only 55\% of the requests were less than
-512kB. It is worth noting that the data presented in this paper are gathered in
-different years, the application versions have changed, and there are a
+\item  For writes, 70\% of the requests on Spider 2 are less than or
+equal to 512kB, whereas on Spider 1 only 55\% of the requests were less than
+or equal to 512kB. It is worth noting that the data presented in this paper are
+ gathered in
+different years, the application versions have changed, and there was a
 different mix of applications running as the data were collected. The OLCF
 traditionally has a large mix of applications that have well-formed I/O or are
 using middleware libraries such as ADIOS \cite{adios}. The latest round of
 applications do not have this robustness in their I/O patterns, and have shown
-to have some pathological tendencies; these smaller files and request sizes
+to have some pathological tendencies. These smaller files and request sizes
 that are more focused on read operations are large performance drains on a
 system that was designed to perform 1MB sequential write and read I/O
 operations. 
@@ -226,19 +226,21 @@ again that the Application workload of the OLCF is different enough at the
 times of measurement to show this difference in the distribution.
 
 \item   On Spider 1, we observed a large number of 512kB requests for both read
-and write requests. This was due to problems in the dm-multipath \cite{mpath}
+and write requests. This was due to problems in the {\tt dm-multipath} \cite
+{mpath}
 package that was available for the version of the Linux operating system that
 was employed. This version had a bug that broke up a 1024kB I/O request into 2
 512kB requests. Later versions addressed this performance problem by not
-breaking up the I/O request. Additionally the I/O request scheduler that was
-used on Spider 1 was ``deadline'' which allowed the kernel to re-order some I/O
-requests.  In 2011 Spider 1 was moved to the ``noop'' scheduler, and this
+breaking up the I/O request. Additionally Spider 1 used the {\tt deadline} I/O
+request scheduler which allowed the kernel to re-order some I/O
+requests.  In 2011, Spider 1 was moved to the  {\tt noop} scheduler, and this
 phenomenon disappeared. We see the same drop in 512kB requests for Spider 2 as
-well. Finally, changes to the ib\_srp kernel module allow more queued requests
+well. Finally, changes to the {\tt ib\_srp} kernel module allow more queued
+requests
 and better memory handling of a larger queue through scatter\/gather tables.
 This allowed fully queuing 1024kB requests and pushing them all the way to the
 DDN controller. As a result of these 3 changes the number of 512kB requests
-have dramatically been reduced for Spider 2.  \end{itemize}
+have been dramatically reduced for Spider 2.  \end{itemize}
 
 \subsubsection{Request Size Latency distribution}
 

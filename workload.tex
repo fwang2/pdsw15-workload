@@ -57,18 +57,18 @@ the trend is moving back toward the expected balance.
 
 \subsubsection{Peak Bandwidth Usage}
 
-Figure~\ref{fig:ddnpeakBW} (a) and Figure~\ref{fig:ddnpeakBW}(b), show the
+Figures~\ref{fig:ddnpeakBW}(a) and ~\ref{fig:ddnpeakBW}(b) show the
 peak read and write bandwidth observed at the DDN RAID controllers for Spider 1
-and Spider 2, respectively. 
-
-In Figure~\ref{fig:ddnpeakBW}(b) the peak read bandwidth observed was 90\% of the
-maximum for Spider 1 (3 GB/s); we observred 80\% of the maximum bandwidth for 
-Spider 2 (36 GB/s). For writes, the bandwidth observed was 50\% for Spider 1 and 70\% for
-Spider 2 controllers. These values show us that our read I/O workloads are getting a 
-slightly lower peak value of the overall percentage. The silver-lining is that the write
-operations on Spider 2 are obtaining a higher percentage of the peak performance. This can be
+and Spider 2, respectively.  Figure~\ref{fig:ddnpeakBW}(b) shows that the peak read
+bandwidth observed was 90\% of the 
+maximum theoretical performance for Spider 1 (3 GB/s per controller); we observed 80\% of the maximum bandwidth for 
+Spider 2 (36 GB/s per controller). For writes, the bandwidth observed was 50\% for Spider 1 and 70\% for
+Spider 2. These values show us that our current read I/O workloads are achieving a 
+slightly lower peak value of the overall percentage. The good news is that the write
+operations on Spider 2 are obtaining a higher percentage of the peak performance.
+This can be
 attributed to better formed write I/O being issued from the Titan supercomputer. While 
-the exact reasons for this is under the investigation, we believe the middleware 
+the exact reasons for this are under the investigation, we believe the middleware 
 libraries such as ADIOS~\cite{adios} are helping to improve the I/O characteristics. 
 
 

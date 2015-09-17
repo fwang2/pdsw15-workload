@@ -1,15 +1,16 @@
 \section*{Conclusions}
 \label{sec:conc}
 
-Large-scale file systems are complex to architect and deploy and they are
-equally complex to operate. Key to successful deployment and operations is
-understanding the I/O workloads exercising these file systems. At the OLCF we
-pay particular attention to collecting file system statistics for better
-understanding how our file systems are used. Over the 5 year lifetime of the
-Spider 1 file system, we collected detailed operational data and we are doing
-the same with the Spider 2 file system. Spider 1 data was essential in
-architecting the Spider 2 system, and we are expecting that Spider 2 data will
-instrumental in building the next-generation parallel file system at the OLCF.
+Large-scale file systems are complex to architect and deploy and are equally
+complex to operate. Key to successful deployment and operation is understanding
+the I/O workloads exercising these file systems. At the OLCF we continue to pay
+particular attention to collecting file system statistics for better
+understanding how our file systems are used. Over the 5-year lifetime of Spider
+1, we collected detailed operational data and we are doing the same with the
+Spider 2. Gathering, curating, and querying this data was essential in
+architecting the Spider 2 system, and we are expecting this effort will again
+be instrumental in building the next-generation parallel file system at the
+OLCF.
 
 
 As the Spider 2 data shows us, we observed roughly 75\% writes on the Spider 2
@@ -21,4 +22,7 @@ the 512kB write requests have been eliminated from the system due to the fixes
 in dm-multipath, I/O request scheduling and ib\_srp kernel module feature
 development and bug-fixing. The existence of extra 512kB was detrimental to the
 overall aggregate I/O performance on Spider 1 and this has been corrected in
-Spider 2.
+Spider 2. As it is evident from the observed data, we also believe a Burst
+Buffer layer between our compute platforms and the parallel file system will
+better serve our scientific workloads by absorbing and aligning the bursty I/O
+patterns and therefore improving the application I/O performances. 

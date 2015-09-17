@@ -18,28 +18,25 @@ requests for 50\% of the controllers sampled in the Spider 2 system. This
 imbalance is because the upper level file systems are imbalanced. As we stated
 above, we deployed two file system namespaces on  non-overlapping hardware
 resources. The file systems are allocated across projects at the OLCF and some
-projects have been heavier I/O consumers than others. It turns out that the
-``atlas1'' partition is being utilized at a higher rate.  In general we see a
-higher percentage of write operations on Spider 2 as compared to Spider 1. This
-meets our design expectations for handling large memory checkpoints with 
-minimal reading of those checkpoint data files.
-
-As can be seen in Figure~\ref{fig:rwratio}, approximately 60\% of
-the I/O workload on Spider 1 was write
-operations and 40\% was reads. Spider 1 was a center-wide resource shared
-across all OLCF platforms and the high percentage of the read requests was attributed
-to analysis and data transfer I/O workloads accessing Spider 1. 
-Spider 2 is also a center-wide shared resource, but it has a higher percentage of write operations than Spider 1 (approximately 75\% vs. approximately 60\%).
-This can be attributed to a number of large data
-transfers into Spider 2 from various resources prior to processing that data on Titan.
-
-Also, it is quite visible in Figure~\ref{fig:rwratio}(b)
+projects have been heavier I/O consumers than others, and we have observed 
+that some projects are transferring large datasets to the OLCF for processing 
+on Titan. It turns out that the ``atlas1'' partition is being utilized at a 
+higher rate.  In general we see a higher percentage of write operations on 
+Spider 2 as compared to Spider 1. This meets our design expectations for 
+handling large memory checkpoints with  minimal reading of those checkpoint 
+data files. Also, it is quite visible in Figure~\ref{fig:rwratio}(b)
 that ``atlas1'' portion of Spider 2 is 10\% more write-intensive than the
 Atlas2 (left half vs. the right half of the Figure~\ref{fig:rwratio}(b). 
-This discrepancy is due to some incorrect assumptions that were made when
-deciding how to distribute user projects 
-between the file system namespaces. The allocation method has since been corrected and 
-the trend is moving back toward the expected balance. 
+This discrepancy is due to the same factors and since being corrected the 
+trend is moving back toward the expected balance. Finally, as can be seen 
+in Figure~\ref{fig:rwratio}, approximately 60\% of the I/O workload on 
+Spider 1 was write operations and 40\% was reads. Spider 1 was a center-wide 
+resource shared across all OLCF platforms and the high percentage of the read 
+requests was attributed to analysis and data transfer I/O workloads accessing 
+Spider 1. Spider 2 is also a center-wide shared resource, but it has a higher 
+percentage of write operations than Spider 1 (approximately 75\% vs. 
+approximately 60\%), we have concluded that the way the system is being 
+used accounts for the differences.  
 
 \begin{figure}[!t]
 \begin{center}

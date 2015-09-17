@@ -1,69 +1,30 @@
 \section{System Overview}
 \label{sec:overview}
 
-\begin{comment} 
-
-The OLCF deployed Spider 1 file system in 2008~\cite{spider1}. It served as a
-center-wide file system for all OLCF resources, including Jaguar~\cite{jaguar}
-for 5 years, and was decommissioned in 2013. Our analysis of Spider 1 I/O
-workload was presented in~\cite{spider1-workload}. 
-
-The OLCF deployed Spider 2 file system in 2012~\cite{spider2}. Spider 2 is also
-a center-wide shared resource and serves all current OLCF platforms, including
-the Titan supercomputer~\cite{titan}.
-
-Both Spider 1 and 2 were architected, deployed, and operated by the OLCF staff.
-Both file systems use the Lustre technology~\cite{Lustre}.
-
-Similar to the Spider 1 file system, Spider 2 also uses Data Direct Networks'
-(DDN) block-level RAID controllers. In Spider 2 these controllers are connected
-to external nodes via Infiniband FDR technology. These external nodes serve as
-Lustre I/O servers.
-
-There are 72 DDN  SFA12KX RAID controllers in Spider 2. Each controller runs as
-a tandem pair with another for redundancy. Each pair is called a ``couplet.''
-Each couplet is connected to ten disk enclosures hosting 560 2 TB near-line SAS
-disks. These 560 disks are organized in 8+2 RAID 6 arrays. Therefore, each
-couplet controls 56 RAID sets. Each couplet is also connected to 8 external
-servers and each server are primarily assigned to control and operate 7 of
-these RAID sets. Fail-over pairs between external servers are defined for
-redundancy.
-
-Each external server acts as a Lustre Object Storage Server (OSS) and builds a
-Lustre Object Storage Target (OST) on one of these exported RAID sets. There
-are 288 total Lustre OSSes, and 2,106 Lustre OSTs in Spider 2.
-
-These resources are organized in two separate name spaces in Spider 2. These
-namespaces are identified as ``atlas 1'' and ``atlas 2.'' Namespaces are built
-on non-overlapping Spider 2 hardware resources. Figure~\ref{fig:arch} shows the
-conceptual Spider 2 architecture.  
-
-\end{comment}
-
 Spider 2 which was deployed just before Spider 1 was retired in 2013 was
 architected, deployed, and is operated by the OLCF staff; just as was done for
 Spider 1. Figure~\ref{fig:arch} shows a conceptual architecture for Spider 2.
 The primary building block is a DataDirect Networks SFA12KX RAID controller
-pair with 10 disk enclosures containing a total of 560 2TB NL-SAS disk drives.
+pair (couplet) with 10 disk enclosures containing a total of 560 2TB NL-SAS disk drives.
 8 Lustre OSS hosts are external to the SFA12KX and are connected to the couplet
 via 2 FDR Infiniband links on each host for path redundancy. In total there are
 36 building blocks that are build into two file system namespaces on
 non-overlapping hardware resources (i.e. ``atlas1'' and ``atlas2''). The
-resulting system was rated and tested for an aggregate performance of 1.4 TB/s
+resulting system was rated for, and tested to deliver an aggregate performance of 1.4 TB/s
 for reads and 1.2 TB/s writes which translates into +1 TB/s aggregate read and
 write performance at the file system level.
 
 Table~\ref{table:spider12} highlights key characteristics of the Spider 1 and 2
 file systems.
 
-Through over a decade of deployments the OLCF has built comprehensive
+Through these deployments the OLCF has built comprehensive
 monitoring tools for Spider\cite{ddntool10:ross}. Many of these monitoring
 tools have been in-house developed at the OLCF, particularly the ``DDNTool'', a
 tool which was developed for monitoring the I/O requests from at the DDN
-controller level. With the release of SFAOS, DDN created a python-based API for
-querying performance and request size data from their storage systems.
-``DDNTool'' version 2 makes use of this API to query all 36 SFA12KX couplets
-for this data.
+controller level. With the release of SFAOS and the SFA Hardware platform, 
+DDN created a python-based API for querying performance and request size data 
+from their storage systems. ``DDNTool'' version 2 makes use of this API to query 
+all 36 couplets for this data.
 
 
 \begin{figure}[!t]
@@ -97,7 +58,7 @@ Connectivity & IB DDR & IB FDR\\
 \end{table}
 
 
-\subsection{Monitoring tool}
+\subsection{Storage Controller Monitoring}
 
 DDNTool \cite{ddntool10:ross} was developed to monitor the DDN S2A and SFA
 storage system RAID controllers. Since the two DDN architectures have very
@@ -115,4 +76,3 @@ interval, the old data is overwritten with new data.  By storing a the data in
 a database, though, the data is available to numerous clients via a
 well-documented API.  This allows multiple users to search and query in
 real-time.
-

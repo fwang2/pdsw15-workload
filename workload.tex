@@ -244,12 +244,12 @@ have been dramatically reduced for Spider 2.  \end{itemize}
 
 \subsubsection{Request Size Latency distribution}
 
-With the new DDN SFA API, now we have the capability of collecting I/O request
+With the new DDN SFA API, now we have the capability to collect I/O request
 service latencies. Figure~\ref{fig:spider1-reqLat} shows Spider 2 request
 service latency distributions. Service latency here includes the total sum of
 the time spent on the queue and the time spent on fetching/putting data from/to
 the disk. As can be seen from the figure, 90\% of reads and more than 80\%
-write requests are serviced at most in 16ms and this is the finest granularity
+write requests are serviced in at most 16ms and this is the finest granularity
 the DDN API can provide. 
 
 The SFA12KX's software incorporates newer caching algorithms that are designed
@@ -281,8 +281,8 @@ versions of the product you could either mirror your cache on the partner
 controller for data resilience in the face of controller failure, or you could
 disable the cache and get performance for the large streaming 1MB (or larger)
 writes. ReACT gives a framework where the best of both worlds can exist.  A 1MB
-write can be written directly to disk, which is the lowest latency possible for
-that operation. A 4kB can be written into controller cache and also mirrored to
+block can be written directly to disk, which is the lowest latency possible for
+that operation. A 4kB block can be written into controller cache and also mirrored to
 the partner controller in about the same amount of time, which is far faster
 than committing that operation to the disk. We feel that this feature has
 allowed Spider 2 to reach the low latencies across the spectrum of write

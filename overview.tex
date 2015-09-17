@@ -1,9 +1,18 @@
 \section{System Overview}
 \label{sec:overview}
 
-Spider 2 which was deployed just before Spider 1 was retired in 2013 was
-architected, deployed, and is operated by the OLCF staff; just as was done for
-Spider 1. Figure~\ref{fig:arch} shows a conceptual architecture for Spider 2.
+Jaguar, a 2-petaflop system, was the flagship compute platform at OLCF between
+2009 and 2013, and Spider 1 served the I/O needs of Jaguar. As OLCF was
+deploying Titan, a 20-petaflop system with accelators in 2013, Spider 2 was
+deployed. As the compute platform was scaled up, the Spider storage system was
+also scaled up for bandwidth and capacity. Table~\ref{table:spider12} highlights
+key characteristics of the Spider 1 and 2 file systems. 
+
+%Spider 2 which was deployed just before Spider 1 was retired in 2013 was
+%architected, deployed, and is operated by the OLCF staff; just as was done for
+%Spider 1. 
+
+Figure~\ref{fig:arch} shows a conceptual architecture for Spider 2, very similar to Spider 1. 
 The primary building block is a DataDirect Networks SFA12KX RAID controller
 pair (couplet) with 10 disk enclosures containing a total of 560 2TB NL-SAS disk drives.
 8 Lustre OSS hosts are external to the SFA12KX and are connected to the couplet
@@ -14,17 +23,20 @@ resulting system was rated for, and tested to deliver an aggregate performance o
 for reads and 1.2 TB/s writes which translates into +1 TB/s aggregate read and
 write performance at the file system level.
 
-Table~\ref{table:spider12} highlights key characteristics of the Spider 1 and 2
-file systems.
+
+%Table~\ref{table:spider12} highlights key characteristics of the Spider 1 and 2
+%file systems.
 
 Through these deployments the OLCF has built comprehensive
 monitoring tools for Spider\cite{ddntool10:ross}. Many of these monitoring
 tools have been in-house developed at the OLCF, particularly the ``DDNTool'', a
-tool which was developed for monitoring the I/O requests from at the DDN
-controller level. With the release of SFAOS and the SFA Hardware platform, 
-DDN created a python-based API for querying performance and request size data 
-from their storage systems. ``DDNTool'' version 2 makes use of this API to query 
-all 36 couplets for this data.
+tool which was developed for monitoring the I/O requests from the DDN
+controller level. 
+
+%With the release of SFAOS and the SFA Hardware platform, 
+%DDN created a python-based API for querying performance and request size data 
+%from their storage systems. ``DDNTool'' version 2 makes use of this API to query 
+%all 36 couplets for this data.
 
 
 \begin{figure}[!t]
@@ -58,21 +70,23 @@ Connectivity & IB DDR & IB FDR\\
 \end{table}
 
 
-\subsection{Storage Controller Monitoring}
-
+\textbf{Storage Controller Monitoring} 
 DDNTool \cite{ddntool10:ross} was developed to monitor the DDN S2A and SFA
 storage system RAID controllers. Since the two DDN architectures have very
 different monitoring API's, there are actually two completely separate
 programs:  DDNTool for the S2A architecture and DDNTool\_v2 for the SFA
-architecture.  The two tools are very different in their implementations -
+architecture. The two tools are very different in their implementations -
 DDNTool is a C++ program that communicates with the disk controllers directly
 over TCP/IP while DDNTool\_v2 is a Python program that interfaces with a
 vendor-supplied python library which handles the low level communication - but
-they both accomplish the same basic task.  The tools poll each controller for
+they both accomplish the same basic task. The tools poll each controller for
 various pieces of information (e.g. I/O request sizes, write and read
-bandwidths) at regular rates and store this information in a MySQL database.
-The database is not actually used for long term storage.  In fact, at each poll
-interval, the old data is overwritten with new data.  By storing a the data in
-a database, though, the data is available to numerous clients via a
-well-documented API.  This allows multiple users to search and query in
-real-time.
+bandwidths) at regular rates and writes this information to an in-memory MySQL database.
+At each poll interval, the old data is overwritten with new data. By storing the data in
+a database, the data is available to numerous clients via a
+well-documented API. This allows multiple users to search and query in
+real-time. 
+
+For analysis purposes and understanding long term I/O trends, the data from the in-memory database is
+archived in a MySQL database. For the study in this paper we looked at four months of bandwidth, transfer bytes and request size data.    
+

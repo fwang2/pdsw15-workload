@@ -99,7 +99,7 @@ Spider 2 system was designed to deliver greater than 1 TB/s at the file system l
 if exercised with well-formed, large, sequential I/O on a quiet system. However, under
 normal production workloads, the file system is exercised by random mixed I/O
 workloads. Our earlier tests showed that a single NL-SAS disk drive can achieve
-20-25% of its peak performance under random I/O workloads (with 1 MB I/O block
+20-25\% of its peak performance under random I/O workloads (with 1 MB I/O block
 sizes). Extrapolating from that point the expected Spider 2 performace should be 
 at most 250 GB/s under the bursty production workloads~\cite{bestpractices}.
 
@@ -186,8 +186,8 @@ This helps maintain a utilization less than 75\% on the Spider 2 system.
 Figure~\ref{fig:spider1-reqsizedist} and Figure~\ref{fig:spider2-reqsizedist}
 shows the distribution of read and write requests on Spider 1 and Spider 2,
 respectively. As can be seen, there are differences. The Lustre file system
-supports a range of request block sizes, the smallest being 4 kiloBytes (kB)
-and the largest being 4 MegaBytes (MB).  However, on Spider 1, the smallest
+supports a range of request block sizes, the smallest being 4 kilobytes (kB)
+and the largest being 4 Megabytes (MB).  However, on Spider 1, the smallest
 block size we were able to monitor was 16KB, a limitation of the DDN RAID
 controller. Interpreting from the CDF and PDF plots here are some interesting
 observation.

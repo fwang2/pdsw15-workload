@@ -94,26 +94,26 @@ Figure~\ref{fig:bwUsage}, shows the aggregate bandwidth (i.e. the sum of read
 and write bandwidth) observed on Spider 2. We do not have a comparable data set
 for Spider 1, however, we think it is useful to share the Spider 2 data. 
 
-Spider 2 system was designed to deliver greater than 1 TB/s at the file system level, 
+The Spider 2 file system was designed to deliver greater than 1 TB/s at the file system level 
 if exercised with well-formed, large, sequential I/O on a quiet system. However, under
 normal production workloads, the file system is exercised by random mixed I/O
 workloads. Our earlier tests showed that a single NL-SAS disk drive can achieve
 20-25\% of its peak performance under random I/O workloads (with 1 MB I/O block
-sizes). Extrapolating from that point the expected Spider 2 performace should be 
-at most 250 GB/s under the bursty production workloads~\cite{bestpractices}.
+sizes). Extrapolating from that point, the expected Spider 2 performace should be 
+at most 250 GB/s under such bursty production workloads~\cite{bestpractices}.
 
 
 As can be seen from the Figure~\ref{fig:bwUsage}, more than 95\% of the 
 observed bandwidth was less than 50 GB/s. Around 4\% of the time the bandwidth
 was over 50 GB/s. For less than 1\% of the time the bandwidth peaked over
 250 GB/s. These values are in line with the design goals of Spider 2, as
-typically scientific applications are compute intensive, with performing bursts
-of I/O less than 5\% of their compute time allocations. This suggests that these 
+typical scientific applications are compute intensive and perform
+I/O in bursts that total less than 5\% of their compute time allocations. This suggests that these 
 mixed workloads could benefit from a burst buffer storage layer to absorb and align 
 their I/O.
 
 Figure~\ref{fig:storageUsage} shows the Spider 2 space utilization. As can be
-seen, currently, more than 50\% of the capacity is being used.  For a sustained a
+seen, more than 50\% of the capacity is currently being used.  For a sustained a
 bandwidth of 250 GB/s (peak random production bandwidth) for 10 minutes in a
 day, 146 TBs of data will be generated. Given the 32 PB aggregate capacity of
 Spider 2, this will consume all space on Spider 2 in less than a year. To

@@ -44,9 +44,13 @@ serving over 20,000 filesystem clients at the OLCF.
 %compute, analysis, and visualization resources. 
 %Our work is a follow-up of our previous effort, which analyzed the I/O workload
 %on the Spider 1 file system~\cite{spider1-workload}. 
+
 We collected and analyzed file and storage system data from a large-scale
 production scientific supercomputing complex. Our data and analysis provides
-useful insights on the I/O patterns, in particular I/O bandwidth and request
-size distributions. Our observations and analysis are beneficial to the larger
-community and can be used in building more efficient next-generation large-
-scale storage systems for scientific workloads.
+useful insights on the I/O patterns, in particular I/O bandwidth utilization,
+request size distributions, request latency distribution. Our observation of
+drastically increased peak performance overshadowed by the relative low
+utilization echoes the design trend of employing burst- buffer layer. Our
+analysis, though neither conclusive nor exhaustive, can be beneficial to the
+larger community and can be used in building more efficient next-generation
+large- scale storage systems for scientific workloads.

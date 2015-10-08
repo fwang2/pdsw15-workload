@@ -20,18 +20,17 @@ via 2 FDR Infiniband links on each host for path redundancy. In total there are
 36 building blocks that are build into two file system namespaces on
 non-overlapping hardware resources (i.e. ``atlas1'' and ``atlas2''). The
 resulting system was rated for, and tested to deliver an aggregate performance of 1.4 TB/s
-for reads and 1.2 TB/s writes which translates into +1 TB/s aggregate read and
+for reads and 1.2 TB/s writes which translates into 1+ TB/s aggregate read and
 write performance at the file system level.
 
 
 %Table~\ref{table:spider12} highlights key characteristics of the Spider 1 and 2
 %file systems.
 
-Through these deployments the OLCF has built comprehensive
-monitoring tools for Spider\cite{ddntool10:ross}. Many of these monitoring
+Through the deployments of Spider 1 and Spider 2 the OLCF has built comprehensive
+monitoring tools\cite{ddntool10:ross}. Many of these monitoring
 tools have been in-house developed at the OLCF, particularly the ``DDNTool'', a
-tool which was developed for monitoring the I/O requests from the DDN
-controller level. 
+tool for monitoring the I/O requests from the DDN controller level. 
 
 %With the release of SFAOS and the SFA Hardware platform, 
 %DDN created a python-based API for querying performance and request size data 
@@ -73,20 +72,20 @@ Connectivity & IB DDR & IB FDR\\
 %\textbf{Storage Controller Monitoring} 
 DDNTool \cite{ddntool10:ross} was developed to monitor the DDN S2A and SFA
 storage system RAID controllers. Since the two DDN architectures have very
-different monitoring API's, there are actually two completely separate
-programs:  DDNTool for the S2A architecture and DDNTool\_v2 for the SFA
-architecture. The two tools are very different in their implementations -
-DDNTool is a C++ program that communicates with the disk controllers directly
-over TCP/IP while DDNTool\_v2 is a Python program that interfaces with a
+different monitoring API's, there are two programs:  DDNTool for the S2A 
+architecture and DDNTool\_v2 for the SFA architecture. The two tools are very different in their implementations -
+DDNTool is a C++ program which communicates with the disk controllers directly
+over TCP/IP while DDNTool\_v2 is a Python program which interfaces with a
 vendor-supplied python library which handles the low level communication - but
 they both accomplish the same basic task. The tools poll each controller for
 various pieces of information (e.g. I/O request sizes, write and read
-bandwidths) at regular rates and writes this information to an in-memory MySQL database.
-At each poll interval, the old data is overwritten with new data. By storing the data in
+bandwidths) at regular intervals and writes this information to an in-memory MySQL database.
+At each poll interval, the old data in the database is overwritten with new data. By storing the data in
 a database, the data is available to numerous clients via a
 well-documented API. This allows multiple users to search and query in
 real-time. 
 
 For analysis purposes and understanding long term I/O trends, the data from the in-memory database is
-archived in a MySQL database. For the study in this paper we looked at four months of bandwidth, transfer bytes and request size data.    
+archived in a MySQL database. We looked at the bandwidth, transfer bytes and request size data during 
+the study period of over a 4 months.    
 

@@ -6,20 +6,21 @@ parallel file system development, design, deployment and continuous operation.
 For the last decade, the OLCF has designed and deployed two large center-wide
 parallel file systems. The first instantiation, Spider 1, served the Jaguar 
 supercomputer and its predecessor, Spider 2, now serves the Titan supercomputer, 
-among many other OLCF computational resources. At OLCF we have been rigorously 
-collecting file and storage system statistics from these Spider systems.
+among many other OLCF computational resources. The OLCF has been rigorously 
+collecting file and storage system statistics from these Spider systems since their
+transition to production state.
 
 In this paper we present the collected I/O workload statistics from the Spider
-2 system and compare it to the Spider 1 data. Our analysis show that Spider 2
-is exercised with a more write-heavy I/O workload compared to Spider 1 (75\%
-vs. 60\%, respectively). Our data also shows that the OLCF storage policies
+2 system and compare it to the Spider 1 data. Our analysis show that the Spider 2
+workload is more more write-heavy I/O compared to Spider 1 (75\%
+vs. 60\%, respectively). The data also show the OLCF storage policies
 such as periodic purges are effectively managing the capacity resource of
-Spider 2.  Furthermore, due to improvements in the dm\_multipath and ib\_srp
+Spider 2.  Furthermore, due to improvements in tdm\_multipath and ib\_srp
 software, we are utilizing the Spider 2 system bandwidth and latency resources
 more effectively.  The Spider 2 bandwidth usage statistics shows that our
-system is working within the design specifications, however, it is also evident
+system is working within the design specifications. However, it is also evident
 that our scientific applications can be more effectively served by a burst
-buffer storage layer.  All the data have been collected by monitoring tools
+buffer storage layer.  All the data has been collected by monitoring tools
 developed for the Spider ecosystem. We believe the observed data set and
 insights will help us better design the next-generation Spider file and storage
 system. It will also be helpful to the larger community for building more

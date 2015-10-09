@@ -1,6 +1,6 @@
-\documentclass[conference]{IEEEtran}
+%\documentclass[conference]{IEEEtran}
 %\documentclass{acm_proc_article-sp}
-%\documentclass{sig-alternate}
+\documentclass{sig-alternate-05-2015}
 \usepackage{subfigure}          % subfigures...
 \usepackage{color}
 \usepackage{algorithm}      % for description of algorithms...
@@ -13,13 +13,6 @@
 \usepackage{url}
 %\usepackage[dvipdfm]{graphicx}
 \usepackage{tabularx,ragged2e,booktabs,caption}
-
-%%%%%%% remove the copyright box%%%%%%%%%%%%%%
-\usepackage{etoolbox}
-\makeatletter
-\patchcmd{\maketitle}{\@copyrightspace}{}{}{}
-\makeatother
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
 \newtheorem{definition}{Definition}
@@ -37,10 +30,33 @@
 %\partopsep 2pt
 
 %\setlength{\parindent}{1.5em}
-\sloppy
+%\sloppy
+
+
+
+\newfont{\mycrnotice}{ptmr8t at 7pt}
+\newfont{\myconfname}{ptmri8t at 7pt}
+\let\crnotice\mycrnotice%
+\let\confname\myconfname%
+
+%\begin{document}
+
+%\permission{ \copyright 2015 Association for Computing Machinery. ACM acknowledges that this contribution was authored or co-authored by an employee, contractor or affiliate of the United States government. As such, the United States Government retains a nonexclusive, royalty-free right to publish or reproduce this article, or to allow others to do so, for Government purposes only.}
+%\conferenceinfo{PDSW2015,}{ November 15-20, 2015, Austin, TX, USA}
+%\copyrightetc{Copyright 2015 ACM \the\acmcopyr}
+%\crdata{ISBN 978-1-4503-4008-3/15/11…$15.00.\\
+%DOI: http://dx.doi.org/10.1145/2834976.2834985}
+
 
 %==============================================================================
 \begin{document}
+
+\setcopyright{acmcopyright}
+
+\doi{http://dx.doi.org/10.1145/2834976.2834985}
+\isbn{978-1-4503-4008-3/15/11}
+\conferenceinfo{PDSW2015,}{ November 15-20, 2015, Austin, TX, USA}
+\acmPrice{\$15.00}
 
 \title{Comparative I/O Workload Characterization of\\
 Two Leadership Class Storage Clusters}
@@ -58,7 +74,7 @@ Two Leadership Class Storage Clusters}
 % Because of the available 'opening page real-estate'
 % we ask you to refrain from putting more than six authors
 % (two rows with three columns) beneath the article title.
-% More than six makes the first-page appear very cluttered indeed.
+% More than six mmekakes the first-page appear very cluttered indeed.
 %
 % Use the \alignauthor commands to handle the names
 % and affiliations for an 'aesthetic maximum' of six authors.
@@ -75,9 +91,12 @@ Two Leadership Class Storage Clusters}
 %
 
 \author{ 
+\alignauthor
 Raghul Gunasekaran, Sarp Oral, Jason Hill, Ross Miller, Feiyi Wang, Dustin Leverman\\
-Oak Ridge Leadership Compute Facility, Oak Ridge National Laboratory\\
-\emph{\{gunasekaranr,oralhs,hilljj,rgmiller,fwang2,leverman\}@ornl.gov}
+\vspace{0.05in}
+\affaddr{\large Oak Ridge Leadership Compute Facility, Oak Ridge National Laboratory}\\
+\vspace{0.05in}
+\email{\large \{gunasekaranr,oralhs,hilljj,rgmiller,fwang2,leverman\}@ornl.gov}
 }
 
 

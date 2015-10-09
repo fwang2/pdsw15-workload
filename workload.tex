@@ -38,7 +38,7 @@ shared resource, but it has a higher percentage of write operations than Spider
 the system is being used accounts for the differences; namely the Titan/Spider 2 users have
 more of a checkpoint/restart workload than on Jaguar/Spider 1.  
 
-\begin{figure}[!t]
+\begin{figure}[t]
 \begin{center}
 \begin{tabular}{c}
 {\includegraphics[width=0.5\textwidth]{./figs/spider1-wr-ratio.eps}}\\
@@ -72,11 +72,12 @@ libraries such as ADIOS~\cite{adios} are helping to improve the I/O characterist
 \begin{figure}[!thb]
 \begin{center}
 \begin{tabular}{c}
-%\hspace*{-1cm}                                                           
-{\includegraphics[width=0.450\textwidth]{./figs/spider1-bw-perc-max.eps}}\\
+\hspace*{-0.5cm}                                                           
+{\includegraphics[width=0.50\textwidth]{./figs/spider1-bw-perc-max.eps}}\\
 {(a) Spider 1}\\
 \\
-{\includegraphics[width=0.450\textwidth]{./figs/spider2-bw-perc-max.eps}}\\
+\hspace*{-0.5cm}                                                           
+{\includegraphics[width=0.50\textwidth]{./figs/spider2-bw-perc-max.eps}}\\
 {(b) Spider 2}\\
 \end{tabular}
 \vspace{-0.1in}
@@ -97,7 +98,7 @@ if exercised with well-formed, large, sequential I/O on a quiet system. However,
 normal production workloads, the file system is exercised by random mixed I/O
 workloads. Our early system tests showed a single NL-SAS disk drive can achieve
 20-25\% of its peak performance under random I/O workloads (with 1 MB I/O block
-sizes). Extrapolating from here, the expected Spider 2 performace should be 
+sizes). Extrapolating from here, the expected Spider 2 performance should be 
 at most 250 GB/s under such bursty production workloads.~\cite{bestpractices}.
 
 As can be seen from the Figure~\ref{fig:bwUsage}, more than 95\% of the 
@@ -117,18 +118,18 @@ Spider 2, this will consume all space on Spider 2 in less than a year. To
 prevent this, OLCF employs a ``purge'' policy. Periodically, files with a
 timestamp older than 14 days are deleted from the Spider 2 scratch file system.
 This helps maintain a utilization less than 75\% on the Spider 2 system as we 
-have performance degredation when file system utilization is higher. This performance 
-degredation is due to longer seek times to reach free blocks on the disk drives in the 
+have performance degradation when file system utilization is higher. This performance 
+degradation is due to longer seek times to reach free blocks on the disk drives in the 
 RAID set; purging allows us to try to keep this seeking to a minimum at all times.
 
 
 \begin{figure}[!thb]
 \begin{center}
 \begin{tabular}{c}
-{\includegraphics[width=0.40\textwidth]{./figs/bwUsage.eps}}\\
+{\includegraphics[width=0.45\textwidth]{./figs/spider2-bwCDF.eps}}\\
 \end{tabular}
 \vspace{-0.1in}
-\caption{Spider 2 usage with respect to bandwidth}
+\caption{Cumulative Distribution Function (CDF) of Spider 2 usage with respect to bandwidth}
 \label{fig:bwUsage}
 \end{center}
 \end{figure}
@@ -138,7 +139,7 @@ RAID set; purging allows us to try to keep this seeking to a minimum at all time
 \begin{figure}[!thb]
 \begin{center}
 \begin{tabular}{c}
-{\includegraphics[width=0.40\textwidth]{./figs/storageUsage.eps}}\\
+{\includegraphics[width=0.5\textwidth]{./figs/storageUsage.eps}}\\
 \end{tabular}
 \vspace{-0.1in}
 \caption{Spider 2 usage with respect to storage space}
@@ -281,7 +282,7 @@ operations relieves a bottleneck that earlier versions of DDN's products did
 poorly - including the S2A 9900's that Spider 1 was constructed of. In earlier
 versions of the product the cache could either be mirrored on the partner
 controller for data resilience in the face of controller failure, or could
-be disabled to obgain the performance for large streaming 1MB (or larger)
+be disabled to obtain the performance for large streaming 1MB (or larger)
 writes. ReACT gives a framework where the best of both worlds can exist.  A 1MB
 block can be written directly to disk, which is the lowest latency possible for
 that operation. A 4kB block can be written into controller cache and also mirrored to

@@ -88,7 +88,7 @@ libraries such as ADIOS~\cite{adios} are helping to improve the I/O characterist
 
 \subsubsection{Spider 2 Usage Stats}
 
-Figure~\ref{fig:bwUsage}, shows the aggregate bandwidth (i.e. the sum of read
+Figure~\ref{fig:bwUsage}, shows the aggregate bandwidth (i.e., the sum of read
 and write bandwidth) observed on Spider 2. We do not have a comparable data set
 for Spider 1, however, we think it is useful to share the Spider 2 data to further 
 gain insight into the behavior of applications at this scale. 
@@ -198,12 +198,12 @@ controller. Interpreting from the CDF and PDF plots:
 unable to distinguish between the 4kB, 8kB and 16kB sizes, which accounted for 50\%
 of the write requests. Accounting for this and comparing Spider 1 and 2 file
 size distributions, it can be seen there are 10\% more small block
-requests (i.e.  smaller than 8kB) on Spider 2 for write operations. Please
+requests (i.e.,  smaller than 8kB) on Spider 2 for write operations. Please
 remember these statistics are directly obtained from the DDN controllers not from the
 file system. One possible explanation for this increase could be an increase in the local
 file system (ldiskfs) metadata operations. Another possible explanation could be an
 increase in the number of controller-level background disk integrity check 
-(i.e. scrubbing) events.
+(i.e., scrubbing) events.
 The exact cause of the increase is unknown at this point and it is being
 investigated.  For read operations, Spider 1 and Spider 2 behave the same for
 small files; the distribution has not changed.
@@ -225,7 +225,7 @@ operations.
 \item On Spider 2 over 50\% of reads were 1MB, similar to Spider 1 combined
 512kB and 1MB were 50\%. However, only 25\% of writes on Spider 2 are 1MB,
 whereas on Spider 1 over 45\% of writes where either 512kB or 1MB. We postulate
-again the application workload of the OLCF is different enough at the
+again that the application workload of the OLCF is different enough at the
 times of measurement to show this difference in the distribution.
 
 \item   On Spider 1, we observed a large number of 512kB requests for both read
